@@ -8,14 +8,19 @@ import 'package:flutter/material.dart';
 enum LAYOUTTYPE{
   MOBILE,
   DESKTOP
+
+}
+
+enum BUB{
+  CIRCLE,
+  OVAL,
+  ZIGZAG
 }
 class ScaleController extends ChangeNotifier {
   final Size initScreenSize;
    Size _screenSize;
   LAYOUTTYPE layouttype;
   bool mobile=false;
-
-
 
   Rect _menu, _mainArea;
   double paddingLR, paddingTB;
@@ -26,8 +31,14 @@ class ScaleController extends ChangeNotifier {
   Size currentSize()=>_screenSize;
 
   ScaleController(this.initScreenSize){
-   // print(screenSize);
-   _screenSize=initScreenSize;
+      rescale(initScreenSize);
+
+  }
+
+
+  rescale(Size newSize){
+   // if(_screenSize==null ||newSize!=_screenSize){
+    _screenSize=newSize;
     if (_screenSize.width<900.0){
       mobile=true;
       paddingLR=15.0;
@@ -41,14 +52,11 @@ class ScaleController extends ChangeNotifier {
       paddingTB=30.0;
     }
     _getMenuRect();
-    _getMainAreaRect();
     _getMenuButtonSize();
-  }
-
-  rescale(Size newSize){
-    _screenSize=newSize;
+    _getMainAreaRect();
     scaleX=(initScreenSize.width-_screenSize.width)/initScreenSize.width;
     scaleY=(initScreenSize.height-_screenSize.height)/initScreenSize.height;
+    //}
   }
 
   double h()=>_screenSize.height-(paddingTB*2);
@@ -57,11 +65,17 @@ class ScaleController extends ChangeNotifier {
   Rect mainArea()=>_mainArea??_getMainAreaRect();
   Size menuButton()=>_menuButton??_getMenuButtonSize();
 
+
+
+// Fourier Box 
+   fourierBox(){
+    return Rect.fromLTWH(_mainArea.left, _mainArea.top, _mainArea.width,_mainArea.height);
+  }
   Rect _getMenuRect(){
     if (mobile)_menu= Rect.fromLTWH(paddingLR, paddingTB, w(), fromHRange(0.1, low: 30.0, high: 50.0));
     else {
       double ww = fromWRange(0.2, low: 80.0, high: 150.0);
-      _menu= Rect.fromLTWH(w()-ww, paddingTB, ww, h());
+      _menu= Rect.fromLTWH(w()-ww+paddingLR, paddingTB, ww, h());
     }
     return _menu;
   }
@@ -85,13 +99,9 @@ class ScaleController extends ChangeNotifier {
     return 16.0;
   }
   // Gui box
-  Rect fromPct(double l, double r, double t, double b){
-    return Rect.fromLTRB(l*_mainArea.width, t*_mainArea.height, r*_mainArea.width, b*_mainArea.height,);
-  }
-
-
-
-
+  // LRTB fromPct(double l, double r, double t, double b){
+  //   return LRTB(l*_mainArea.width, r*_mainArea.width, t*_mainArea.height, b*_mainArea.height,);
+  // }
   Rect projList(){
     if(mobile)
       return Rect.fromLTWH(0.0, _mainArea.height/2, w(),  _mainArea.height/2);
@@ -107,16 +117,13 @@ class ScaleController extends ChangeNotifier {
   }
 
   Rect bubbleBox(){
-    
      if(mobile){
-     
       return Rect.fromCenter(
         center:Offset(_mainArea.center.dx, _mainArea.center.dy-_mainArea.height*0.1),
         width:fromWRange(0.7, low:250, high:400),
         height:fromHRange(0.6, low:300, high:500)
         );
      }else{
-
       return  Rect.fromCenter(
         center:_mainArea.center,
         width:fromWRange(0.5, low:250, high:400),
@@ -124,15 +131,8 @@ class ScaleController extends ChangeNotifier {
         );
      }
   }
-
- Rect getBubbleLoc(Point pt, double diameter){
-   double x = _mainArea.left+ pt.x*_mainArea.width;
-   double y = _mainArea.top+ pt.y*_mainArea.height;
-    return Rect.fromCircle(center:Offset(x,y), 
-    radius: (mobile)?fromHRange(diameter, low:50.0, high:150.0):fromHRange(diameter, low:80.0, high:200.0)
-    );
-  }
   Rect centerRect(){
+   
     Rect bb= bubbleBox();
     double padding=10.0;
     double radius= fromHRange(0.3, low:25.0, high:100);
@@ -141,39 +141,18 @@ class ScaleController extends ChangeNotifier {
       radius: radius
       );
   }
-Map<int, Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
-    Map<int, Rect> nodeLocs={};
-    double centerX = bubbleLoc.center.dx;
-    double centerY=bubbleLoc.center.dy;
-    double ringRadius=bubbleLoc.width/3;
-    double angleBetweenNodes = 400/nodesShown;
-    double nodeRadius=fromRange(2*pi*ringRadius/(nodesShown*2), high:ringRadius/2, low:25.0);
-    for(int nodeIndex=0; nodeIndex<nodesShown;nodeIndex++){
-      nodeLocs[nodeIndex]=Rect.fromCircle(
-          center: Offset(
-            centerX+ringRadius*Z(nodeIndex*angleBetweenNodes), 
-            centerY+ringRadius*K(nodeIndex*angleBetweenNodes)
-            ),
-            radius: nodeRadius
-            );
-    }
-    return nodeLocs;
-  }
-  Map<int, Rect> getCategoryLocations(List<CustomModel> categories, {int maxShown= 8}){
-    
-    Map<int, Rect> catLocs={};
-    double centerX = _mainArea.center.dx;
-    double centerY=_mainArea.center.dy-_mainArea.height*0.1;
-    double radiusX=_mainArea.width/3;
-    double radiusY=_mainArea.height/3;
-    int len = (categories.length>maxShown)?maxShown:categories.length;
-    double angleBetweenNodes = 400/len;
+  Map<int, Rect> getLocations({int nodesShown=8,Rect area,BUB layoutType=BUB.CIRCLE, double radiusFrac=.33, double minR=30.0}){
+    area??=_mainArea;
+    Map<int, Rect> itemLocs={};
+    double centerX = area.center.dx;
+    double centerY=area.center.dy;
+    double radiusX=(mobile)?area.width*radiusFrac: area.width*radiusFrac;
+    double radiusY=(layoutType==BUB.OVAL)?area.height*radiusFrac*0.8:radiusX;
 
-    double nodeRadius=(mobile)
-          ? fromRange(2*pi*radiusY/(len*2), high:radiusY/4, low:25.0)
-         : fromRange(2*pi*radiusX/(len*3), high:radiusX/3, low:25.0);
-    for(int nodeIndex=0; nodeIndex<len;nodeIndex++){
-      catLocs[nodeIndex]=Rect.fromCircle(
+    double angleBetweenNodes = 400/nodesShown;
+    double nodeRadius=fromRange(2*pi*radiusY/(nodesShown), high:radiusX/3, low:minR);
+    for(int nodeIndex=0; nodeIndex<nodesShown;nodeIndex++){
+      itemLocs[nodeIndex]=Rect.fromCircle(
           center: Offset(
             centerX+radiusX*Z(nodeIndex*angleBetweenNodes), 
             centerY+radiusY*K(nodeIndex*angleBetweenNodes)
@@ -181,28 +160,9 @@ Map<int, Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
             radius: nodeRadius
             );
     }
-    return catLocs;
+    return itemLocs;
   }
-  // List<Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
-  //   List<Rect> nodeLocs=[];
-  //   double centerX = bubbleLoc.center.dx;
-  //   double centerY=bubbleLoc.center.dy;
-  //   double ringRadius=bubbleLoc.width/3;
-  //   double angleBetweenNodes = 400/nodesShown;
-  //   double nodeRadius=fromRange(2*pi*ringRadius/(nodesShown*2), high:ringRadius/2, low:25.0);
-  //   for(int nodeIndex=0; nodeIndex<nodesShown;nodeIndex++){
-  //     nodeLocs.add(
-  //       Rect.fromCircle(
-  //         center: Offset(
-  //           centerX+ringRadius*Z(nodeIndex*angleBetweenNodes), 
-  //           centerY+ringRadius*K(nodeIndex*angleBetweenNodes)
-  //           ),
-  //           radius: nodeRadius
-  //           ));
-  //   }
-  //   return nodeLocs;
-  // }
-  
+   
 
 
   // Essay
@@ -252,3 +212,92 @@ Map<int, Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
   // double fracHOnlyIfMore(double frac, double or)=>(screenSize.height*frac>or)?screenSize.height*frac:0.0;
   // double fracWIfMore(double frac, double or)=>(screenSize.width*frac>or)?screenSize.width*frac:or;
   // double wOnlyIfMore(double frac, double or)=>(screenSize.width*frac>or)?screenSize.width*frac:0.0;
+
+
+   //  _screenSize=initScreenSize;
+  //   if (_screenSize.width<900.0){
+  //     mobile=true;
+  //     paddingLR=15.0;
+  //     paddingTB=10.0;
+  //     layouttype=LAYOUTTYPE.MOBILE;
+  //   }
+  //     else {
+  //     layouttype=LAYOUTTYPE.DESKTOP;
+  //     mobile = false;
+  //      paddingLR=30.0;
+  //     paddingTB=30.0;
+  //   }
+  //   _getMenuRect();
+  //   _getMainAreaRect();
+  //   _getMenuButtonSize();
+
+// Map<int, Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
+//     Map<int, Rect> nodeLocs={};
+//     double centerX = bubbleLoc.center.dx;
+//     double centerY=bubbleLoc.center.dy;
+//     double ringRadius=bubbleLoc.width/3;
+//     double angleBetweenNodes = 400/nodesShown;
+//     double nodeRadius=fromRange(2*pi*ringRadius/(nodesShown*2), high:ringRadius/2, low:25.0);
+//     for(int nodeIndex=0; nodeIndex<nodesShown;nodeIndex++){
+//       nodeLocs[nodeIndex]=Rect.fromCircle(
+//           center: Offset(
+//             centerX+ringRadius*Z(nodeIndex*angleBetweenNodes), 
+//             centerY+ringRadius*K(nodeIndex*angleBetweenNodes)
+//             ),
+//             radius: nodeRadius
+//             );
+//     }
+//     return nodeLocs;
+//   }
+//   Map<int, Rect> getCategoryLocations(List<CustomModel> categories, {int maxShown= 8}){
+    
+//     Map<int, Rect> catLocs={};
+//     double centerX = _mainArea.center.dx;
+//     double centerY=_mainArea.center.dy-_mainArea.height*0.1;
+//     double radiusX=_mainArea.width/3;
+//     double radiusY=_mainArea.height/3;
+//     int len = (categories.length>maxShown)?maxShown:categories.length;
+//     double angleBetweenNodes = 400/len;
+
+//     double nodeRadius=(mobile)
+//           ? fromRange(2*pi*radiusY/(len*2), high:radiusY/4, low:25.0)
+//          : fromRange(2*pi*radiusX/(len*3), high:radiusX/3, low:25.0);
+//     for(int nodeIndex=0; nodeIndex<len;nodeIndex++){
+//       catLocs[nodeIndex]=Rect.fromCircle(
+//           center: Offset(
+//             centerX+radiusX*Z(nodeIndex*angleBetweenNodes), 
+//             centerY+radiusY*K(nodeIndex*angleBetweenNodes)
+//             ),
+//             radius: nodeRadius
+//             );
+//     }
+//     return catLocs;
+//   }
+
+   //Rect getBubbleLoc(Point pt, double diameter){
+//    double x = _mainArea.left+ pt.x*_mainArea.width;
+//    double y = _mainArea.top+ pt.y*_mainArea.height;
+//     return Rect.fromCircle(center:Offset(x,y), 
+//     radius: (mobile)?fromHRange(diameter, low:50.0, high:150.0):fromHRange(diameter, low:80.0, high:200.0)
+//     );
+//   }
+  // List<Rect> getNodeLocations(Rect bubbleLoc, int nodesShown){
+  //   List<Rect> nodeLocs=[];
+  //   double centerX = bubbleLoc.center.dx;
+  //   double centerY=bubbleLoc.center.dy;
+  //   double ringRadius=bubbleLoc.width/3;
+  //   double angleBetweenNodes = 400/nodesShown;
+  //   double nodeRadius=fromRange(2*pi*ringRadius/(nodesShown*2), high:ringRadius/2, low:25.0);
+  //   for(int nodeIndex=0; nodeIndex<nodesShown;nodeIndex++){
+  //     nodeLocs.add(
+  //       Rect.fromCircle(
+  //         center: Offset(
+  //           centerX+ringRadius*Z(nodeIndex*angleBetweenNodes), 
+  //           centerY+ringRadius*K(nodeIndex*angleBetweenNodes)
+  //           ),
+  //           radius: nodeRadius
+  //           ));
+  //   }
+  //   return nodeLocs;
+  // }
+  

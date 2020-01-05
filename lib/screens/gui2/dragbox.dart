@@ -1,29 +1,31 @@
 
+
+
+import 'package:cshannon/screens/gui2/lrtb.dart';
 import 'package:flutter/material.dart';
-enum DRAGSIDE{
-  NONE,
-  CENTER,
-  LEFT,
-  RIGHT, 
-  TOP,
-  BOTTOM
-}
+import 'dart:math';
+const BOX_COLOR = Colors.cyan;
+const BOX_COLOR2 = Colors.yellow;
+enum DRAGSIDE { LEFT, RIGHT, DOWN, UP, NONE, CENTER }
+enum CHILDTYPE { BOX,IMAGE,TEXT,BUTTON}
+
 class DragBox {
   bool isDragging = false;
   Color color = Colors.transparent;
   DRAGSIDE dragside = DRAGSIDE.NONE;
-  Rect o;
-  Rect b;
+  LRTB o;
+  LRTB b;
   double newposition;
-  Offset start, activeOffset;
+  Point start;
+  Point activePoint;
   //Size size;
-  DragBox(Rect initPosition, Rect initBounds){
+  DragBox(LRTB initPosition, LRTB initBounds){
     this.o=initPosition;
     this.b =initBounds;
   }
 
 
-  bool isOnBox(Offset tap) {
+  bool isOnBox(Point tap) {
       print("IN BOX");
       start = tap;
       isDragging = true;
@@ -31,30 +33,27 @@ class DragBox {
       return true;
   }
 
-  void updateDrag(Offset point) {
+  void updateDrag(Point point) {
     if (!isDragging) return;
-    activeOffset = point;
-    var dragVecY = activeOffset.dy - start.dy;
-    var dragVecX = activeOffset.dx - start.dx;
+    activePoint = point;
+    var dragVecY = activePoint.y - start.y;
+    var dragVecX = activePoint.x - start.x;
     final normDragVecX = (dragVecX ).clamp(-1.0, 1.0);
     final normDragVecY = (dragVecY ).clamp(-1.0, 1.0);
     if (dragside == DRAGSIDE.NONE) getdragside(dragVecX, dragVecY);
     if (dragside == DRAGSIDE.CENTER) {
-      start = activeOffset;
-      o=Rect.fromLTRB(
-        (o.left + normDragVecX).clamp(b.left, b.right),
-        (o.top + normDragVecY).clamp(b.top, b.bottom), 
-       (o.right + normDragVecX).clamp(b.left, b.right),// right, 
-        (o.bottom + normDragVecY).clamp(b.top, b.bottom)
-        );
-      
+      start = activePoint;
+      o.left = (o.left + normDragVecX).clamp(b.left, b.right);
+      o.right = (o.right + normDragVecX).clamp(b.left, b.right);
+      o.top = (o.top + normDragVecY).clamp(b.top, b.bottom);
+      o.bottom = (o.bottom + normDragVecY).clamp(b.top, b.bottom);
     } else if (dragside == DRAGSIDE.LEFT || dragside == DRAGSIDE.RIGHT) {
       if (dragside == DRAGSIDE.LEFT)
         newposition = (o.left + normDragVecX).clamp(b.left, b.right);
       else
         newposition = (o.right + normDragVecX).clamp(b.left, b.right);
     } else {
-      if (dragside == DRAGSIDE.BOTTOM)
+      if (dragside == DRAGSIDE.DOWN)
         newposition = (o.bottom + normDragVecY).clamp(b.top, b.bottom);
       else
         newposition = (o.top + normDragVecY).clamp(b.top, b.bottom);
@@ -67,13 +66,13 @@ class DragBox {
     double centerY = (o.top + (o.bottom - o.top) / 2);
     double spanX = o.right - o.left;
     double spanY = o.bottom - o.top;
-    if ((start.dx - centerX).abs() < spanX * .25 &&
-        (start.dy - centerY).abs() < spanY * .25) {
+    if ((start.x - centerX).abs() < spanX * .25 &&
+        (start.y - centerY).abs() < spanY * .25) {
       print("Center");
       dragside = DRAGSIDE.CENTER;
     } else {
       if (dragVecX.abs() > dragVecY.abs()) {
-        if (start.dx - o.left > o.right - start.dx) {
+        if (start.x - o.left > o.right - start.x) {
           print("right");
           dragside = DRAGSIDE.RIGHT;
         }
@@ -83,12 +82,12 @@ class DragBox {
           dragside = DRAGSIDE.LEFT;
         }
       } else {
-        if (start.dy - o.top > o.bottom - start.dy) {
+        if (start.y - o.top > o.bottom - start.y) {
           print("down");
-          dragside = DRAGSIDE.BOTTOM;
+          dragside = DRAGSIDE.DOWN;
         } else {
           print("up");
-          dragside = DRAGSIDE.TOP;
+          dragside = DRAGSIDE.UP;
         }
        
       }
@@ -96,15 +95,15 @@ class DragBox {
   }
 
 
-  bool endDrag({bool circle=false}) {
-
-    o=Rect.fromLTRB(
-      (dragside == DRAGSIDE.LEFT)?newposition:o.left, 
-      (dragside == DRAGSIDE.TOP)?newposition:o.top, 
-     (dragside == DRAGSIDE.RIGHT)?newposition:o.right, 
-      (dragside == DRAGSIDE.BOTTOM)?newposition:o.bottom
-    );
-    activeOffset = null;
+  bool endDrag() {
+    if (dragside == DRAGSIDE.UP)
+      o.top = newposition;
+    else if (dragside == DRAGSIDE.DOWN)
+      o.bottom = newposition;
+    else if (dragside == DRAGSIDE.LEFT)
+      o.left = newposition;
+    else if (dragside == DRAGSIDE.RIGHT) o.right = newposition;
+    activePoint = null;
     newposition = null;
     start = null;
     dragside = DRAGSIDE.NONE;
@@ -116,8 +115,8 @@ class DragBox {
   //bool isDismissed()=>((o.right-o.left)<0.03 || (o.bottom-o.top)<0.03);
 
   Path drawPath(Size size) {
-    if (dragside == DRAGSIDE.BOTTOM) return drawBottom(size);
-    if (dragside == DRAGSIDE.TOP) return drawTop(size);
+    if (dragside == DRAGSIDE.DOWN) return drawBottom(size);
+    if (dragside == DRAGSIDE.UP) return drawTop(size);
     if (dragside == DRAGSIDE.LEFT) return drawLeft(size);
     if (dragside == DRAGSIDE.RIGHT) return drawRight(size);
     return drawBox(size);
@@ -129,7 +128,7 @@ class DragBox {
    // print(size);
     final path = Path();
     // Draw the curved sections with quadratic bezier to
-    // Start at the Offset of the touch
+    // Start at the point of the touch
     path.moveTo(size.width * o.left, size.height * o.top);
     // draw the curvedo.left side curve
     path.lineTo(size.width * o.right, size.height * o.top);
@@ -145,25 +144,28 @@ class DragBox {
     final prevBoxValueY = (size.height * o.bottom);
     final midPointY = ((boxValueY - prevBoxValueY) * 1.2 + prevBoxValueY)
         .clamp(0.0, size.height);
-    Offset mid;
+    Point mid;
 
-    mid = Offset(size.width * (o.left + (o.right - o.left) / 2), midPointY);
+    mid = Point(size.width * (o.left + (o.right - o.left) / 2), midPointY);
 
     final path = Path();
-    path.moveTo(mid.dx, mid.dy);
+    path.moveTo(mid.x, mid.y);
     path.moveTo(size.width *o.left, size.height *o.top);
     path.lineTo(size.width *o.left, size.height *o.bottom);
     // draw the curvedo.left side curve
     path.quadraticBezierTo(
-      mid.dx - size.width* ( o.right -o.left )/2, //x1,
-      mid.dy, //y1,
-       mid.dx, mid.dy
-    
+      mid.x - size.width* ( o.right -o.left )/2, //x1,
+      mid.y, //y1,
+       mid.x, mid.y
+      // size.width * o.left, //x2,
+      // size.height * o.bottom, //y2
     );
-   
+    //
+    // path.lineTo(size.width*right, size.height*top);
+ //   path.moveTo(mid.x, mid.y);
     path.quadraticBezierTo(
-      mid.dx + size.width* ( o.right -o.left )/2, //x1,
-      mid.dy, //y1,
+      mid.x + size.width* ( o.right -o.left )/2, //x1,
+      mid.y, //y1,
       size.width * o.right, //x2,
       size.height * o.bottom, //y2
     );
@@ -180,26 +182,26 @@ class DragBox {
     final prevBoxValueY = (size.height *o.top);
     final midPointY = ((boxValueY - prevBoxValueY) * 1.2 + prevBoxValueY)
         .clamp(0.0, size.height);
-    Offset mid;
+    Point mid;
   
-    mid =Offset(size.width * (o.left + (o.right -o.left) / 2), midPointY);
+    mid = Point(size.width * (o.left + (o.right -o.left) / 2), midPointY);
     final path = Path();
     path.moveTo(size.width *o.left, size.height *o.bottom);
     path.lineTo(size.width *o.left, size.height *o.top);
-    //path.moveTo(mid.dx, mid.dy);
+    //path.moveTo(mid.x, mid.y);
       path.quadraticBezierTo(
-      mid.dx-size.width* ( o.right -o.left )/2,
-      mid.dy, //y1,
-      mid.dx, mid.dy
+      mid.x-size.width* ( o.right -o.left )/2,
+      mid.y, //y1,
+      mid.x, mid.y
       // size.width *o.left, //x2,
       // size.height *o.top, //y2
     );
 
   
-    //path.moveTo(mid.dx, mid.dy);
+    //path.moveTo(mid.x, mid.y);
     path.quadraticBezierTo(
-      mid.dx + size.width* ( o.right -o.left )/2, //x1,
-      mid.dy, //y1,
+      mid.x + size.width* ( o.right -o.left )/2, //x1,
+      mid.y, //y1,
       size.width *o.right, //x2,
       size.height *o.top, //y2
     );
@@ -216,28 +218,28 @@ class DragBox {
     final prevBoxValueX = (size.width *o.left);
     final midPointX = ((boxValueY - prevBoxValueX) * 1.2 + prevBoxValueX)
         .clamp(0.0, size.width);
-    Offset mid;
+    Point mid;
 
-    mid = Offset(midPointX, size.height * (o.top + (o.bottom -o.top) / 2));
+    mid = Point(midPointX, size.height * (o.top + (o.bottom -o.top) / 2));
 
     final path = Path();
-    //path.moveTo(mid.dx, mid.dy);
+    //path.moveTo(mid.x, mid.y);
     path.moveTo(size.width *o.right, size.height *o.top);
     path.lineTo(size.width *o.left, size.height *o.top);
     // draw the curvedo.left side curve
     path.quadraticBezierTo(
-      mid.dx, //x1,
-      mid.dy -size.height* ( o.bottom -o.top )/2, //y1,
-      mid.dx, mid.dy
+      mid.x, //x1,
+      mid.y -size.height* ( o.bottom -o.top )/2, //y1,
+      mid.x, mid.y
       // size.width *o.left, //x2,
       // size.height *o.top, //y2
     );
     //
     // path.lineTo(size.width*right, size.height*top);
-    //path.moveTo(mid.dx, mid.dy);
+    //path.moveTo(mid.x, mid.y);
     path.quadraticBezierTo(
-      mid.dx, //x1,
-      mid.dy +size.height* ( o.bottom -o.top )/2, //y1,
+      mid.x, //x1,
+      mid.y +size.height* ( o.bottom -o.top )/2, //y1,
       size.width *o.left, //x2,
       size.height *o.bottom, //y2
     );
@@ -254,29 +256,29 @@ class DragBox {
     final prevBoxValueX = (size.width *o.right);
     final midPointX = ((boxValueY - prevBoxValueX) * 1.2 + prevBoxValueX)
         .clamp(0.0, size.width);
-    Offset mid;
+    Point mid;
 
-    mid = Offset(midPointX, size.height * (o.top + (o.bottom -o.top) / 2));
+    mid = Point(midPointX, size.height * (o.top + (o.bottom -o.top) / 2));
 
     final path = Path();
- //   path.moveTo(mid.dx, mid.dy);  // draw the curvedo.left side curve
+ //   path.moveTo(mid.x, mid.y);  // draw the curvedo.left side curve
 
     path.moveTo(size.width *o.left, size.height *o.top);
     path.lineTo(size.width *o.right, size.height *o.top);
     
     path.quadraticBezierTo(
-      mid.dx, //x1,
-      mid.dy - size.height* ( o.bottom -o.top )/2, //y1,
-      mid.dx, 
-      mid.dy
+      mid.x, //x1,
+      mid.y - size.height* ( o.bottom -o.top )/2, //y1,
+      mid.x, 
+      mid.y
       // size.width *o.right, //x2,
       // size.height *o.top, //y2
     );
     //
-    //path.moveTo(mid.dx, mid.dy);
+    //path.moveTo(mid.x, mid.y);
     path.quadraticBezierTo(
-      mid.dx, //x1,
-      mid.dy + size.height* ( o.bottom -o.top )/2, //y1,
+      mid.x, //x1,
+      mid.y + size.height* ( o.bottom -o.top )/2, //y1,
       size.width *o.right, //x2,
       size.height *o.bottom, //y2
     );
@@ -288,35 +290,5 @@ class DragBox {
     return path;
   }
 
-}
-
-
-class DragPainter extends CustomPainter {
-  final DragBox dragbox;
-  final Paint boxPaint1;
-  //final Paint dropPaint;
-
-  DragPainter({
-    this.dragbox,
-  }) : boxPaint1 = Paint()
-  //dropPaint = Paint()
-  {
-    boxPaint1.color = this.dragbox.color;
-    boxPaint1.style = PaintingStyle.fill;
-    // dropPaint.color = Colors.grey;
-    // dropPaint.style = PaintingStyle.fill;
-  }
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    canvas.clipRect(Rect.fromLTWH(0.0, 0.0, size.width, size.height));
-    Path pathOne = dragbox.drawPath(size);
-    canvas.drawPath(pathOne, boxPaint1);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
 }
 

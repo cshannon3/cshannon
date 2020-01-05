@@ -18,6 +18,158 @@ String work='''
       So if our survival depends on predicting the future, the best way to predict the future is to control it. And this is where the problems start. Society is a balance of trust through shared expectations and freedom to break from those expectations. If there are no norms, no shared beliefs, then we can't build up ideas and benefits across society and generations
     ''';
     
+String intro='''
+%%normal%%
+#size35##italic##bold#What I Want This Site To Be#/italic##/bold#
+
+#size20#
+
+%%image%%#linkhttps://miro.medium.com/max/954/1*R1zMS-MZESF36fiKshoOsQ.png##aligncenter##width0.3##height0.15#
+%%normal%%
+#size20#
+  I want this site to be an experimental 'playground' to the potential of the internet to allow for new ways to learn, share, organize, create and collaborate. Through my own experiences I've found example after example of sites and creators that have this vision and I hope to join them in my own attempt to create a site uniquely suited to the internet.
+                          
+  #size25##italic##bold#Learning#/italic##/bold##size20#
+  The most obvious way I see the internet enhancing our lives in the future will be to improve the way we learn new information. We learn by extending our current understanding to include the new information and the best way to do this is to experiment with the system and understand it in the context of what we already know. In a typical lecture or course we learn mostly through solving static problems which can easily lead to us losing sight of the relavence of the numbers and symbols on the page. 
+
+  A better approach that the internet allows is one in which we can interact with the 'world' of what we are learning and see what happens when we make changes to it. Just like how a baby gains an intuitive uderstanding of gravity by pushing thinks off the table to see what happens, we can get a much more intuitive sense of math and science by changing variables and seeing what happens to the system. 
+
+  My first experiement on the site with this is on gaining an intuitive understanding of fourier transforms, a concept that I struggled with in my engineering classes but have since found it to be a fascinating and valuable idea. I hope by connecting the mathmatics to the musical concepts of consanance and dissonance.
+
+  #size25##italic##bold#Creating, Collaborating and Sharing #/italic##/bold##size20#
+  Currently the barriers to entry to create a website and share content in an engaging way is still too high. While youtube, twitter, wordpress and others make it easier to share content to the world, they still leave huge gaps in how information can be created and shared on the internet. 
+
+  #size25##italic##bold#Organize#/italic##/bold##size20#
+  The amount of useful and amazing content on the web is overwhelming. We are moving from a world where information is scarce and change is slow to one with info is abundant and scattered and rapid change. I have yet to find a way to organize info from books, sites, Twitter YouTube , life etc. The idea of using webs is that info can easily be seen in big picture and found through multiple different approachs. This is still a super early demo of this but  I believe that a "Web of life" could be a way to match the way our brains work.
+
+''';
+String rulesToLiveBy='''
+%%normal%%
+
+#size35##italic##bold#Rules TO Live By#/italic##/bold#
+
+
+#size25##italic##bold#1. Golden rule#/bold##size16##/italic#
+ Treat others as you would like to be treated
+
+
+#size25##italic##bold#2. Silver rule#/bold##size16##/italic#
+ -  Don't do unto others what you don't want done unto you
+
+#size25##italic##bold#3. Pursuasion over Coersion
+%%quote%%
+##size22#"Unlike coersion, which becomes ineffective as soon as the coerser loses power, persuasion leaves a permanent mark"
+
+    #italic##colorblue##size18#-K.C. Cole(Something)
+%%normal%%
+#size25##italic##bold#4. Systems over Outcomes and Events
+
+#size25##italic##bold#5. Understanding over Arguing
+%%quote%%
+##size22#"The opposite of a fact is falsehood, but the opposite of one profound truth may very well be another profound truth."
+
+  #italic##colorblue##size18#—Niels Bohr
+%%normal%%
+%%quote%%
+##size22#"If we declare that soley the assertion opposed to ours is false or else that soley ours is not false, we are nevertheless forced to admit an infinite number of true or false judgements. For the one who expresses a true assertion proclaims simultaneously that it is true, and so on ad infinitum"
+
+  #italic##colorblue##size18#—Aristotle
+%%normal%%
+#size25##italic##bold#6. Inaction over Reaction
+%%quote%%
+##size22#"The worst thing a sin of a bitch can do is turn you into a son of a bitch"
+    
+    #italic##colorblue##size18#—Frank Oppenheimer (Something)
+ %%normal%%
+#size25##italic##bold#7. Calculated Risks over Playing It Safe
+%%quote%%
+##size22#"If failure isn't an option then neither is success"
+
+  #italic##colorblue##size18#— Seth Godin
+%%normal%%
+#size25##italic##bold#8. Big Hairy Audacious Goals over Easily Achievable Goals
+%%quote%%
+##size22#"A glorious failure is better than a petty success"
+
+  #italic##colorblue##size18#— Alfred Adler
+%%normal%%
+
+#size25##italic##bold#9. Diverse Views vs Bubble
+%%quote%%
+##size22#"To become an extremist, hang around with people you agree with"
+
+    #italic##colorblue##size18#— Cass Sunstein
+  %%normal%%
+#size25##italic##bold#10. Long Term over Short Term
+%%quote%%
+##size22#"Greatness and nearsightedness are incompatible. Meaningful achievement depends on lifting one's sights and pushing towards the horizon"
+
+#italic##colorblue##size18#— Daniel Pink
+%%normal%%
+#size25##italic##bold#11. Impact over money
+
+#size25##italic##bold#12. System 2 over System 1
+
+#size25##italic##bold#13. Intrinsic over Extrinsic Rewards
+
+#size25##italic##bold#14. Simplicity over Complexity
+%%quote%%
+##size22#"Complexity is your enemy, any fool can make something more complicated. It is hard to keep something simple"
+
+  #italic##colorblue##size18#— Richard Branson
+%%normal%%
+%%quote%%
+##size22#"Any Intelligent fool can make things more complex...it takes a touch of genius and a lot of courage to go in the opposite direction"
+
+  #italic##colorblue##size18#— Albert Einstein
+%%normal%%
+%%quote%%
+##size22#“A complex system that works is invariably found to have evolved from a simple system that worked. A complex system designed from scratch never works and cannot be patched up to make it work. You have to start over with a working simple system.”
+
+  #italic##colorblue##size18#—Gall's Law
+%%normal%%
+#size25##italic##bold#15. Humility over Hubris
+%%quote%%
+##size22#"Ignorance more frequently begets confidence than does knowledge."
+
+ #italic##colorblue##size18#— Charles Darwin, The Descent of Man
+%%normal%%
+%%quote%%
+##size22#"To be absolutely certain about something, one must know everything or nothing about it."
+
+  #italic##colorblue##size18#— Henry Kissinger
+%%normal%%
+%%quote%%
+##size22#"Our comforting conviction that the world makes sense rests on a secure foundation: our almost unlimited ability to ignore or ignorance"
+  
+  #italic##colorblue##size18#— Daniel Kahneman
+%%normal%%
+#size25##italic##bold#16. Ends over Means
+%%quote%%
+##size22#"In schools--but where isn't it so?-- we so easily fall into the same trap: the means to an end becomes the end in itself"
+
+  #italic##colorblue##size18#— John Holt(How Children Fail)
+%%normal%%
+#size25##italic##bold#17. Transparency over secrecy
+%%normal%%
+
+#size25##italic##bold#18. Actions over words
+%%quote%%
+##size22#
+"The greatest wisdom not applied to action and behavior is meaningless data"
+
+ #italic##colorblue##size18###size20#—Peter Drucker
+  %%normal%%
+%%quote%%
+##size22#
+"Talking about the problems of the world without talking about solutions is the way to paralysis rather than progress"
+  
+#italic##colorblue##size18#— Abhijit V. Banerjee, Esther Duflo(Poor Economics)
+''';
+
+
+
+
 String antilib='''
 %%normal%%
 #linkhttps://fs.blog/2013/06/the-antilibrary/##size35##italic##bold#The Antilibrary: Why Unread Books Are The Most Important#/color##/link##/italic##/bold#
@@ -65,7 +217,7 @@ My library serves as a visual reminder of what I don’t know.
 
 String lifesShort='''
 #linkhttp://www.paulgraham.com/vb.html##size35##italic##bold#Life is Short#/color##/link##/italic##/bold#
-
+#size16#Source: #bold#Paul Graham#/color##size20#
 #italic##colorgrey##size20#January 2016
 #/color##/italic#
 Life is short, as everyone knows. When I was a kid I used to wonder about this. Is life actually short, or are we really complaining about its finiteness? Would we be just as likely to feel life was short if we lived 10 times as long?

@@ -145,6 +145,7 @@ class _AudioPlayer {
   bool isInitialized = false;
 
   void initialize() {
+
     audioElement = AudioElement()
       ..src = uri.toString()
       ..autoplay = false

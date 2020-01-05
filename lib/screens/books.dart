@@ -21,7 +21,7 @@ class _BooksState extends State<Books> {
  @override
   void initState() {
     super.initState();
-    books=widget.stateManager.getModels("books");
+    books=widget.stateManager.getAllModels();//"books"
   }
   void onActivate(CustomModel book){
     if(activeModels.contains(book)){
@@ -61,7 +61,7 @@ class _BooksState extends State<Books> {
                 children: new List<Widget>.generate(books.length, (index) {
                   return new 
                      BookTile(bookData:books[index], setActive: onActivate,isActive: activeModels.contains(books[index]),);
-              
+            
                 })
                 )
                 );
@@ -175,7 +175,10 @@ class _BookTileState extends State<BookTile> {
                         borderOnForeground:widget.isActive,
                         color: Colors.grey.withOpacity(0.3),
                         child: Container(
-                          child: (widget.bookData==null)?null: Image.asset(widget.bookData.vars["imgUrl"], fit: BoxFit.fill,)
+                          child: (widget.bookData==null)?null:
+                          widget.bookData.vars["imgUrl"].contains("http")?
+                           Image.network(widget.bookData.vars["imgUrl"], fit: BoxFit.fill,)
+                          : Image.asset(widget.bookData.vars["imgUrl"], fit: BoxFit.fill,)
                         )
                       ),
                     ),

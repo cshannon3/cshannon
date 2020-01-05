@@ -1,0 +1,122 @@
+
+[
+    {
+      "id": 0,
+       "fontColor":"black",
+         "imgUrl":"https://thebrain.mcgill.ca/flash/d/d_06/d_06_cr/d_06_cr_mou/d_06_cr_mou_4a.jpg", 
+         "name":"The Brain McGill", 
+         "url":"https://thebrain.mcgill.ca/index.php",
+         "categories": ["Neuroscience"],
+         "description": ""
+         },
+         {
+         "id": 1,
+         "fontColor":"black",
+         "imgUrl":"http://what-when-how.com/wp-content/uploads/2011/08/tmp314_thumb.jpg", 
+         "name":"Network Models", 
+         "url":"https://what-when-how.com/data-communications-and-networking/network-models-data-communications-and-networking/",
+         "categories": ["Computers"],
+         "description": ""
+ 
+         },
+         {
+      "id": 2,
+      "fontColor":"black",
+         "imgUrl":"http://networksciencebook.com/images/ch-01/figure-1-6.jpg", 
+         "name":"Network Science", 
+         "url":"http://networksciencebook.com/",
+         "categories": ["Computers"],
+         "description": ""
+         },
+         {  
+      "id": 3,
+         "imgUrl":"https://www.thevirtualbrain.org/tvb/static/style/img/logo_tvb_main.svg", 
+         "name":"Virtual Brain", 
+         "url":"https://www.thevirtualbrain.org/tvb/zwei/brainsimulator-software",
+         "categories": ["Neuroscience", "AI"],
+         "description": ""
+         },
+         {
+      "id": 4,
+         "imgUrl":"https://agi.io/wp-content/uploads/2019/10/logo-inverse-brown.png", 
+         "name":"Project AGI", 
+         "url":"https://agi.io/",
+         "categories": ["AI"],
+         "description": ""
+         },
+         {
+      "id": 5,
+         "imgUrl":"https://i1.wp.com/portal.bluebrain.epfl.ch/wp-content/uploads/2019/07/BBP_megapaper_header_homepage_1.jpg", 
+         "name":"Blue Brain Portal", 
+         "url":"https://portal.bluebrain.epfl.ch/",
+         "categories": ["Neuroscience"],
+         "description": ""
+         },
+          {
+      "id": 6,
+       "fontColor":"blue",
+         "imgUrl":"https://avatars2.githubusercontent.com/u/22019253?s=200&v=4", 
+         "name":"Distill", 
+         "url":"https://distill.pub/",
+         "categories": ["AI"],
+         "description": ""
+         },
+          {
+      "id": 7,
+         "imgUrl":"https://www.asimovinstitute.org/wp-content/uploads/2019/04/AsinRound-300x300.png", 
+         "name":"THE ASIMOV INSTITUTE", 
+         "url":"https://www.asimovinstitute.org/neural-network-zoo-prequel-cells-layers/",
+         "categories": ["AI"],
+         "description": "sjffff"
+         },
+          {
+      "id": 9,
+       "fontColor":"black",
+         "imgUrl":"https://lh3.googleusercontent.com/vOToo-3knoqpS4oL0YpNZG5EN93aH5TPhwH4tdCqP_tIpPw8fiRKycf5H-EpPquZwhU=s180", 
+         "name":"Hook Theory", 
+         "url":"https://www.hooktheory.com/trends",
+         "categories": ["Music"],
+         "description": " "
+         },
+         {
+      "id": 10,
+         "imgUrl":"https://magenta.tensorflow.org/assets/magenta-logo-bottom-text.png", 
+         "name":"Magenta", 
+         "url":"https://magenta.tensorflow.org/demos/community/",
+      
+         "categories": ["Music","AI" ],
+         "description": ""
+         },
+         {
+      "id": 11,
+         "imgUrl":"https://149366099.v2.pressablecdn.com/wp-content/uploads/2019/03/FarnamStreet_Icon_NoBackground-copy.png", 
+         "name":"Farnam Street", 
+         "url":"https://fs.blog/",
+         "categories": ["General" ],
+         "description": ["Farnam Street is a blog and the creator of \"The Knowledge Project\" podcast. They focus on distilling the wisdom from the countless books they have read and through interviews with successful people from every discipline. If you like Tim Ferris, you will also like Farnam Street.",
+
+ "Favorite Articles\n- #linkhttps://fs.blog/2016/04/munger-operating-system/##size16##italic#The Munger Operating System#/color##/link##/italic#",
+"\n- #linkhttps://fs.blog/2016/06/value-grey-thinking/##size16##italic#The Value of Grey Thinking#/color##/link##/italic#\n - #linkhttps://fs.blog/2016/08/daniel-pink-two-types-of-motivation/##size16##italic#Daniel Pink on Incentives and the Two Types of Motivation#/color##/link##/italic# "
+         ]
+},
+          {
+      "id": 12,
+      "fontColor": "black",
+         "imgUrl":"https://stratechery.com/wp-content/uploads/2018/03/stratechery-logomark.png", 
+         "name":"Stratechery", 
+         "url":"https://stratechery.com/",
+         "categories": ["General" ],
+         "description": ""
+         },
+             {
+                "fontColor": "black",
+      "id": 13,
+         "imgUrl":"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Y_Combinator_logo.svg/1200px-Y_Combinator_logo.svg.png", 
+         "name":"Paul Graham", 
+         "url":"http://www.paulgraham.com/articles.html",
+         "categories": ["General" ],
+         "description": " "
+         }
+      
+]
+ 

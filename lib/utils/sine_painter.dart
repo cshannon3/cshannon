@@ -19,7 +19,7 @@ class SinePainter extends CustomPainter {
       this.yRange,
       this.phaseShift=0.0,
       this.decay=0.0,
-this.height=1.0,
+      this.height=1.0,
 this.startH=0.0,
       this.traceColor = Colors.green});
 

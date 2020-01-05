@@ -138,7 +138,7 @@ Widget quoteTemplate(String textSeg, Size size)=>
     child: 
                 ListView(
                   children: <Widget>[
-                  ]..addAll(toComplexText(antilib,
+                  ]..addAll(toComplexText(rulesToLiveBy,
                   templates:{
                     "normal":(String textSeg)=>normalTemplate(textSeg, s),
                     "quote":(String textSeg)=>quoteTemplate(textSeg, s),
@@ -209,7 +209,7 @@ Widget quoteTemplate(String textSeg, Size size)=>
                 padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 35.0),
                 child: ListView(
                   children: <Widget>[
-                  ]..addAll(toComplexText(antilib,
+                  ]..addAll(toComplexText(rulesToLiveBy,
                   templates:{
                     "normal":(String textSeg)=>normalTemplate(textSeg, s),
                     "quote":(String textSeg)=>quoteTemplate(textSeg, s),

@@ -1,21 +1,21 @@
 
-import 'dart:math';
+// import 'dart:math';
 
-import 'package:cshannon/controllers/scale_controller.dart';
-import 'package:cshannon/models/item_node.dart';
-import 'package:flutter/material.dart';
+// import 'package:cshannon/controllers/scale_controller.dart';
+// import 'package:cshannon/models/item_node.dart';
+// import 'package:flutter/material.dart';
 
-class CategoryBubble{
-  final String name;
-  final int id;
-  Color color;
-  Rect bubbleLoc;
-  List<ItemNode> nodes;
+// class CategoryBubble{
+//   final String name;
+//   final int id;
+//   Color color;
+//   Rect bubbleLoc;
+//   List<ItemNode> nodes;
   
-  Point centerAbout;
-  double diameter;
-  CategoryBubble({this.name, this.id, this.centerAbout, this.diameter, this.color});
-}
+//   Point centerAbout;
+//   double diameter;
+//   CategoryBubble({this.name, this.id, this.centerAbout, this.diameter, this.color});
+// }
 
   // init(ScaleController sc, List<ItemNode> childrenNodes){
   //   //nodes = bubs.where((b)=>(b.categories!=null && b.categories[0]==name)).toList();

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 
 
-
 class HomePage extends StatelessWidget {
   final StateManager stateManager;
   List<CustomModel> projects=[];
@@ -39,7 +38,7 @@ class HomePage extends StatelessWidget {
     projects.forEach((p){
        out.add(projectWidget(projTile, p));
      });
-     print(out.length);
+   //  print(out.length);
     return out;
   }
   
@@ -133,11 +132,20 @@ class HomePage extends StatelessWidget {
            child: Container(
              height: stateManager.sc.w()/2,
              width: stateManager.sc.w()/2,
-             child: CircleAvatar(
-                      radius: stateManager.sc.w()/2,
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage("assets/coverphoto2.jpg"),
-                    ),
+             child: Stack(
+               children: <Widget>[
+                 CircleAvatar(
+                          radius: stateManager.sc.w()/2,
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: AssetImage("assets/coverphoto2.jpg"),
+                        ),
+                        Center(child: Text("Welcome, I'm Connor Shannon",textAlign: TextAlign.center, style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic),)),
+               ],
+             ),
            ),
          ),
      Padding(
@@ -184,8 +192,12 @@ class HomePage extends StatelessWidget {
                 )
                 )
                 ),
-        Align(
-            alignment: Alignment.centerLeft,
+        Positioned(
+         left: 30.0,
+         top: stateManager.sc.h()/2-80,
+         height: 50.0,
+         width: 150.0,
+                  
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
@@ -212,7 +224,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("refresh");
+   // print("refresh");
     projects= stateManager.getModels("projects");
     return stateManager.sc.mobile? mobileLayout():desktopLayout();
   }

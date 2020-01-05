@@ -1,18 +1,22 @@
 
-
-import 'package:cshannon/models/dragbox.dart';
+import 'dart:math';
+import 'package:cshannon/screens/gui2/dragbox.dart';
+import 'package:cshannon/screens/gui2/guiboxes.dart';
+import 'package:cshannon/screens/gui2/lrtb.dart';
 import 'package:cshannon/utils/utils.dart';
 import 'package:flutter/material.dart';
 
+
 class GuiBox{
-  Rect loc;
-  Rect bounds=Rect.fromLTRB(0.0, 1.0, 0, 1.0);
+  LRTB loc;
+  LRTB bounds=LRTB(0.0, 1.0, 0.0, 1.0);
   List<GuiBox> childrenBoxes=[];
   int currentIndex;
   DragBox currentDragBox;
   int tapCount=0;
   int myTapCount=0;
   Color color;
+
 
  // Point activeClickLocation;
   bool dismissMe=false;
@@ -27,95 +31,108 @@ class GuiBox{
 
   Widget child;
   GuiBox(this.loc, {this.color});
-  _checkChildren(Offset clickLocation){
-    print("CHILD NOT EMPTY");
+  bool isFocused()=>(myTapCount>0 && currentIndex==null);
+
+  bool handleClick(Point clickLocation, ){
+    print("MY LOCATION");
+    loc.prnt();
+  print(clickLocation);
+    if(loc.isWithin(clickLocation)){
+      myTapCount+=1;
+      Point rs = loc.rescale(clickLocation);
+      print("HANDLE CLICK");
+      print(rs);
+      print(clickLocation);
+      print(myTapCount);
+     
+        if(childrenBoxes.isNotEmpty && myTapCount>1 ){//&& !passedInChild
+          print("CHILD NOT EMPTY");
           int i =0;
-          while(childrenBoxes.length>i && !childrenBoxes[i].handleClick(clickLocation))i++;
+          while(childrenBoxes.length>i && !childrenBoxes[i].handleClick(rs))i++;
           if(i==childrenBoxes.length){
             print("SELF CLICKED");
             if(currentIndex!=null){currentIndex=null;tapCount=0;}else{ tapCount+=1;}
-            if(myTapCount>2)_addNewBox(clickLocation);
-            else{
+           // if(!guiActive)return true;
+            if(myTapCount>1){// && !passedInChild
+                  GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y),color: RandomColor.next());
+                  childrenBoxes.add(b); 
+                  currentIndex=childrenBoxes.length-1;
+                  setBounds();
+                  childrenBoxes.last.fitSpace(shrink:0.75);
+              }
+            }
+
+          else{
               print("CHILD $i CLICKED");
               if(currentIndex!=i){currentIndex = i;tapCount=0;}
               else tapCount+=1;
               if(tapCount>2){
               print("CHILD MULTITAP");
+                
               } 
-            }
+              }
+        }
 
-  }
-  }
-  _addNewBox(Offset clickLocation){
-    print("SELF MULTITAP");
-    GuiBox b= GuiBox(Rect.fromCenter(center: clickLocation, height: 0.0, width: 0.0),color: RandomColor.next());
-    childrenBoxes.add(b);
-    currentIndex=childrenBoxes.length-1;
-    setBounds();
-    childrenBoxes.last.fitSpace(shrinkBy:0.75);
-  }
 
-  _handleClick(Offset clickLocation){
-  myTapCount+=1;
-      print("HANDLE CLICK");
-      print(clickLocation); print(myTapCount);
-        if(childrenBoxes.isNotEmpty && myTapCount>1 )_checkChildren(clickLocation);
-        else if(myTapCount>2 )_addNewBox(clickLocation);
-        
+        else if(myTapCount>2 ){ //&& !passedInChild && guiActive&& !passedInChild
+            print("SELF MULTITAP");
+           
+            GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y), color: RandomColor.next());
+            childrenBoxes.add(b);
+            currentIndex=childrenBoxes.length-1;
+            setBounds();
+              childrenBoxes.last.fitSpace(shrink:0.75);
+               print("CHILD LOCATION");
+               childrenBoxes.last.loc.prnt();
+        }
       else{
            if(currentIndex!=null){currentIndex=null;tapCount=0;}else{ tapCount+=1;}
         }
     
       return true;
-    
-
-  }
-
-  bool handleClick(Offset clickLocation){
-    print(loc.center);print(clickLocation);
-    if(loc.contains(clickLocation)){
-    _handleClick(clickLocation);
-    return true;
-  }
+    }
     else {
       myTapCount=0;
       currentIndex=null;tapCount=0;
       return false;
     }
   }
-  _handleDrag(Offset clickLocation){
-    setBounds();
+
+  bool handleDrag(Point clickLocation){
+   // print("HDRAG");
+    print(clickLocation);
+    loc.prnt();
+    if(loc.isWithin(clickLocation)){
+      //print("TRE");
+      Point rs = loc.rescale(clickLocation);
+      print(rs);
+      setBounds();
       if(currentIndex!=null &&
-         childrenBoxes[currentIndex].handleDrag(clickLocation)){
+       // tapCount>1 &&
+      //!passedInChild &&
+         childrenBoxes[currentIndex].handleDrag(rs)){
           print("DRAGGING child $currentIndex");
+          
           childDragging=true;
           isDragging=false;
         }
         else if(!isRoot){ // && guiActive
           print("DRAGGING self");
-        //  loc.prnt();
+          loc.prnt();
       currentDragBox=DragBox(loc,bounds );
       currentDragBox.isOnBox(clickLocation);
       isDragging=true;
         }
-  }
-
-  bool handleDrag(Offset clickLocation){
-    print(clickLocation);
-    if(loc.contains(clickLocation)){
-      //Offset rs = loc.rescale(clickLocation);
-      _handleDrag(clickLocation);
       return true;
     }
     else return false;
 
   }
-  updateDrag(Offset point) {
+  updateDrag(Point point) {
     if(isDragging && !isRoot) currentDragBox.updateDrag(point);
-
-    else if(childDragging)childrenBoxes[currentIndex].updateDrag(point);
+//&& !passedInChild
+    else if(childDragging)childrenBoxes[currentIndex].updateDrag(loc.rescale(point));
   }
-
   endDrag(){
     dismissMe=false;
     setBounds();
@@ -134,14 +151,14 @@ class GuiBox{
     }
   }
 
- 
-    
+  updateBounds(LRTB neighborBox)=>
+    bounds = loc.updateBounds(neighborBox, bounds);
   
-  resetBounds()=>bounds=loc;
+  resetBounds()=>bounds=LRTB(0, 1.0, 0, 1.0);
   
-  void fitSpace({double shrinkBy}){
+  void fitSpace({double shrink}){
     loc=bounds;
-    if(shrink!=null)shrink(shrinkBy);
+    if(shrink!=null)loc.shrink(shrink);
   }
   setBounds({boxIndex}){
     if(boxIndex==null && currentIndex!=null)boxIndex=currentIndex;//if(currentBox==null)return;
@@ -163,9 +180,8 @@ class GuiBox{
     ),
     );
   }
-  Widget toWidget(Size screenSize, {Widget newChild, Function() refresh}){
+  Widget toWidget(Size screenSize, { Function() refresh,@required Function({Widget child}) getBox}){//Widget newChild,
     Size s = Size((loc.right-loc.left)*screenSize.width,(loc.bottom-loc.top)*screenSize.height);
-
 
      return Positioned(
        left: loc.left*screenSize.width,
@@ -176,11 +192,15 @@ class GuiBox{
          children: <Widget>[
            SizedBox.fromSize(
           size: s,
-         child: Container(color:color,
-         child:
-         (newChild!=null)?Container(color:Colors.green,child: newChild)
-        // :(childCall!=null)?childCall()
-         :(childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh):Text("Hello")
+         child: Container(
+           decoration: BoxDecoration(
+           color:color,
+           borderRadius: BorderRadius.circular(20.0),
+           border:isFocused()?Border.all(color: Colors.grey, width: 5.0):null
+           ),
+         child:isFocused()?getBox(child:(childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):null):
+         (childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):
+         Center(child: Text("Box X"))
          )),
            guiActive?SizedBox.fromSize(
           size: s,
@@ -191,11 +211,14 @@ class GuiBox{
        ));
 
   }
-    Widget toStack(Size screenSize, {Function() refresh}){
+    Widget toStack(Size screenSize, {Function() refresh, @required Function({Widget child}) getBox}){
+      //print(screenSize);
       List<Widget> out=[];
       childrenBoxes.forEach((f){
-        out.add(f.toWidget(screenSize, refresh: refresh));
+        out.add(f.toWidget(screenSize, refresh: refresh,getBox: getBox ));
       });
+      
+     // if(currentDragBox!=null)
       if(childDragging &&
       currentIndex!=null &&
       childrenBoxes[currentIndex].currentDragBox!=null
@@ -205,47 +228,15 @@ class GuiBox{
                       dragbox: childrenBoxes[currentIndex].currentDragBox
                     ), // Box Painter
                     child: Container()),);
+      
       return Stack(children: out);
     }
 
 
-    Offset rescale(Offset clickLocation){
-      Offset p=Offset(
-        (clickLocation.dx-loc.left)/(loc.right-loc.left),
-        (clickLocation.dy-loc.top)/(loc.bottom-loc.top), );
-        return p;
-    }
-    shrink(double pct){
-      var w = (1-pct)*(loc.right-loc.left)/2;
-      var h = (1-pct)*(loc.bottom-loc.top)/2;
-      loc= Rect.fromLTRB(loc.left+w, loc.top+h,loc.right-w, loc.bottom-h);
-    }
-    
-    updateBounds(Rect neighborBox){
-      if(onEdge(neighborBox))return;
-       
-      double l= (neighborBox.right<loc.left && neighborBox.right>bounds.left)?neighborBox.right:bounds.left; //left, 
-       double r=(neighborBox.left>loc.right && neighborBox.left<bounds.right)?neighborBox.left:bounds.right;
-       double t=(neighborBox.bottom<loc.top && neighborBox.bottom >bounds.top)?neighborBox.bottom:bounds.top;
-       double b= (neighborBox.top>loc.bottom && neighborBox.top<bounds.bottom)?neighborBox.top:bounds.bottom;
-    
-               
-      bounds = Rect.fromLTRB(l, t, r, b);
-    }
-    bool onEdge(Rect neighborBox){
-      if((neighborBox.bottom<loc.top ||neighborBox.top>loc.bottom) &&(neighborBox.left>loc.right || neighborBox.right<loc.left))return true;
-      return false;
-    }
-    // shrink(double pct){
-    //   var w = (1-pct)*(right-left)/2;
-    //   var h = (1-pct)*(bottom-top)/2;
-      
-    //   right=right-w;
-    //   left=left+w;
-    //   bottom=bottom-h;
-    //   top=top+h;
 
-    // }
+}
 
 
- }
+
+
+

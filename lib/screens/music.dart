@@ -120,12 +120,7 @@ void _handleKeyEvent(RawKeyEvent event) {
     if(pl.containsKey(note)){
  
       if(pl[note].value.isPlaying){
-          //print("playing");
-         
           pl[note].pause();
-          
-          
-        
       }
       else{
       pl[note].play();

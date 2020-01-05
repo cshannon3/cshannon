@@ -120,15 +120,34 @@ Map<String, dynamic> mymodelsLib = {
           "name": tokens.containsKey("name")?tokens["name"]:"",
           "color": parseMap["color"](tokens),
           "loc":null,
+          "size":1,//tokens.containsKey("size")?int.tryParse(tokens["size"]):2,
           "nodes":[]
         };
     },
     "functions": (CustomModel self) => {
-          "toModel":()=>CategoryBubble(name: self.vars["name"], id:self.vars["id"])
+         // "toModel":()=>CategoryBubble(name: self.vars["name"], id:self.vars["id"])
         }
   },
-
-  "node":{
+  "site":{
+     "vars": (
+      var tokens,
+    ) {
+        return {
+          "id": 0,
+          "name": tokens.containsKey("name")?tokens["name"]:"",
+          "fontColor": parseMap["color"](tokens),
+          "loc":null,
+          "categories":tokens.containsKey("categories")?new List<String>.from(tokens["categories"]):[],
+          "url": tokens.containsKey("url")?tokens["url"]:"",
+          "imgUrl": tokens.containsKey("imgUrl")?tokens["imgUrl"]:"",
+          "description":tokens.containsKey("description")? (tokens["description"] is List)?tokens["description"].join():tokens["description"]:"",
+        };
+    },
+    "functions": (CustomModel self) => {
+          
+        }
+  },
+   "youtube":{
      "vars": (
       var tokens,
     ) {
@@ -180,121 +199,7 @@ Map<String, dynamic> otherModelsLib = {
               // "#widget#offset_dx_#m_*_^scale_@x_#\m_dy_#m_*_^scale_@y_#\m"
         },
   },
-  "fourierLines": {
-    "vars": (var tokens) =>
-        {
-          "lines":[],//tokens.containsKey("lines")?tokens["lines"]:[],
-          "stepPerUpdate":2.5, //tryParse(tokens, ["stepsPerUpdate", "stepPerUpdate","spu"])??2.0,
-          "thickness": 4.0,//tryParse(tokens, ["thickness", "t"])??4.0,
-          "xScale":1.0,
-          "traceColor":Colors.blue,//parseMap["color"](tokens)??Colors.blue,
-          "trace":[],
-          "showYAxis": true, //tokens.containsKey("showYAxis")?tokens["showYAxis"]:true,
-          "animationController":null
-       },
-    "functions": (CustomModel self) => {
-          "squareWave":({int numoflines, double line1Len}){
-            self.vars["lines"]=[];
-            // (loop for x from 0 to ${numofLine} )
-            for (int i = 0; i < numoflines; i++) {
-                String root = (i==0)?"_root_":"_";
-                String data = "line2d_length_${line1Len * (1 / (1.0 + (i * 2)))}_node_$i"+
-                root + "freqMult_${1.0 + (i * 2)}_color_random_conNode_${i-1}";
-                self.vars["lines"].add(CustomModel.fromLib(data));
-              }
-          },
-          "setWave":({double line1Len, double w1speed=1.0, 
-                      double w2speed=3.0, 
-                      double w3speed=5.0, 
-                      double w4speed=7.0, 
-                      double w5speed=9.0, 
-                      double w1size=1.0, 
-                      double w2size=1.0/3.0, 
-                      double w3size=1.0/5, 
-                      double w4size=1.0/7, 
-                      double w5size=1.0/9
-            }){
-            self.vars["lines"]=[];
-            self.vars["lines"].add(CustomModel.fromLib("line2d_length_${line1Len *w1size}_node_0_root_freqMult_${w1speed}_color_random"));
-            self.vars["lines"].add(CustomModel.fromLib("line2d_length_${line1Len *w2size}_node_1_freqMult_${w2speed}_color_random_conNode_0"));
-            self.vars["lines"].add(CustomModel.fromLib("line2d_length_${line1Len *w3size}_node_2_freqMult_${w3speed}_color_random_conNode_1"));
-            self.vars["lines"].add(CustomModel.fromLib("line2d_length_${line1Len *w4size}_node_3_freqMult_${w4speed}_color_random_conNode_2"));
-            self.vars["lines"].add(CustomModel.fromLib("line2d_length_${line1Len *w5size}_node_4_freqMult_${w5speed}_color_random_conNode_3"));
-      
-          },
-          "animate":({@required TickerProvider vsync, @required Function() setState}){
   
-            self.vars["animationController"]=  AnimationController(vsync: vsync, duration: Duration(seconds: 5))
-          ..addListener(() {
-            setState();
-          })
-          ..repeat();
-          },
-          "dispose":(){
-            print("DISP");
-            self.vars["animationController"].dispose();
-            self.vars["animationController"]=null;
-          },
-          "paint":(Canvas canvas, Size size){
-                final tracePaint = Paint()
-                ..strokeJoin = StrokeJoin.round
-                ..strokeWidth = 2.0
-                ..color = self.vars["traceColor"]
-                ..style = PaintingStyle.stroke;
-                final axisPaint = Paint()
-                  ..strokeWidth = 1.0
-                  ..color = Colors.orange;
-                  var totalLen =0.0;
-                  self.vars["lines"].forEach((lineNode) {
-                            List<dynamic> nodepoints =lineNode.vars["root"]
-                      ? lineNode.calls["setPosition"](
-                          startlocation: Offset(size.width / 2, size.height / 4),
-                          stepPerUpdate: self.vars["stepPerUpdate"])
-                      : lineNode.calls["setPosition"](
-                          startlocation: self.vars["lines"]
-                              .firstWhere((ls) => ls.vars["node"] == lineNode.vars["conNode"]).vars["endNodeLoc"],
-                          stepPerUpdate: self.vars["stepPerUpdate"]) ;
-                  Paint p = Paint()
-                    ..color = lineNode.vars["color"]
-                    ..strokeWidth = self.vars["thickness"]
-                    ..strokeCap = StrokeCap.round
-                    ..style = PaintingStyle.stroke;
-                  canvas.drawLine(nodepoints[0], nodepoints[1], p);
-                  totalLen += lineNode.vars["length"];
-                  if (lineNode == self.vars["lines"].last) {
-                    self.vars["trace"].add((lineNode.vars["endNodeLoc"].dy - (size.height / 4)) / totalLen);
-                  }
-                  // only start plot if dataset has data
-                  int length = self.vars["trace"].length;
-                  if (length > 0) {
-                    // transform data set to just what we need if bigger than the width(otherwise this would be a memory hog)
-                    if (length > size.width) {
-                      self.vars["trace"].removeAt(0);
-                      length = self.vars["trace"].length;}
-                    // Create Path and set Origin to first data point
-                    Path tracePath = Path();
-                    tracePath.moveTo(
-                        0.0, 3 * size.height / 4 + self.vars["trace"][0].toDouble() * size.height / 4);
-                    // generate trace path
-                    for (int p = 0; p < length; p++) {
-                      double plotPoint =
-                          3 * size.height / 4 + self.vars["trace"][p].toDouble() * size.height / 4;
-                      tracePath.lineTo(p.toDouble() * self.vars["xScale"], plotPoint);
-                    }
-                    // display the trace
-                    canvas.drawPath(tracePath, tracePaint);
-                    // if yAxis required draw it here
-                    if (self.vars["showYAxis"]) {
-                      Offset yStart = Offset(0.0, 3 * size.height / 4);
-                      Offset yEnd = Offset(size.width, 3 * size.height / 4);
-                      canvas.drawLine(yStart, yEnd, axisPaint);
-                    }
-            }
-          });
-        },
-  },
-  },
-   
   "line2d": {
     "vars": (var tokens) => {
           "node": tryParse(tokens, ["node"]) ?? 0,
@@ -327,94 +232,11 @@ Map<String, dynamic> otherModelsLib = {
               self.vars["node"].compareTo(node2.vars["node"]),
    }
   },
-  "comboWave": {
-    "vars": (var tokens) => {
-          "waves":tokens["waves"],
-          "PPF": tokens.containsKey("ppf")?tokens["ppf"] : 0.012,
-          "progress":  0.0,
-          "samplingfreq":  tokens.containsKey("samplingfreq")?tokens["samplingfreq"]:-1,
-          "color": tokens.containsKey("color")?tokens["color"]:Colors.green,
-          "waveVal": CustomModel.fromLib("waveVal"),
-          "sampleLocations": [],
-          "sampleCounter":0,
-          "trace":[],
-          "radius":100.0,
-        },
-    "functions": (CustomModel self) => {
-          "update": () {
-          self.vars["trace"].add(self.vars["waveVal"]?.vars["k"]);
-          self.vars["sampleCounter"] += 1;
-          if (self.vars["samplingfreq"] != -1 && (self.vars["sampleCounter"]> self.vars["samplingfreq"])) {
-            self.vars["sampleLocations"].add(CustomModel.fromLib("point_x_${self.vars["waveVal"].vars["z"]}_y_${self.vars["waveVal"].vars["k"]}"));//Point(waveVals.z, waveVals.k)
-            self.vars["sampleCounter"]= 0;
-            if (self.vars["sampleLocations"].length > 1) {
-              double x =  (self.vars["sampleLocations"][0].vars["x"] * (self.vars["sampleLocations"].length - 1) +
-                          self.vars["sampleLocations"].last.vars["x"]) /
-                      self.vars["sampleLocations"].length;
-              double y =  0.9*(self.vars["sampleLocations"][0].vars["y"]* (self.vars["sampleLocations"].length - 1) +
-                          self.vars["sampleLocations"].last.vars["y"]) /
-                      self.vars["sampleLocations"].length;
-              self.vars["sampleLocations"][0] = CustomModel.fromLib("point_x_${x}_y_$y");
-            }
-          }
-          self.vars["waveVal"]?.calls["zero"]();
-          self.vars["waves"].forEach((w) {
-            CustomModel wa = w.calls["updateWave"](self.vars["progress"]);
-            self.vars["waveVal"]?.calls["add"](wa);
-          });
-          self.vars["waveVal"].vars["rot"] = self.vars["waveVal"].vars["rot"] / self.vars["waves"].length;
-          self.vars["progress"] += self.vars["PPF"];
-      },
-      "animate":({@required TickerProvider vsync, @required Function() setState}){
-  
-            self.vars["animationController"]=  AnimationController(vsync: vsync, duration: Duration(seconds: 5))
-          ..addListener(() {
-            self.calls["update"]();
-            setState();
-          })
-          ..repeat();
-          },
-          "dispose":(){
-            self.vars["animationController"].dispose();
-          },
-      // "paint": (Canvas canvas, Size size){
-      // },
-      "toWidgetList":(var tokens){//var radius = tokens.containsKey("radius")?tokens["radius"]:100.0;
-        var widgetList = [self.calls["toWidget"](tokens)];
-        self.vars["waves"]?.forEach((w)=>widgetList.add(w.calls["toWidget"](tokens)));
-        return widgetList;
-      },
-      "toWidget":(var tokens){
-        
-        // "center+transform(transform_@transform)+fractionalTranslation(offset(dx_-0.5_dy_-0.5))+container(h_30_w_10_color_green)
-        // var trans = Matrix4.translationValues( radius * self.vars["waveVal"].vars["z"], -radius * self.vars["waveVal"].vars["k"],
-                           //   0.0)..rotateZ(  -self.vars["waveVal"].vars["rot"],),
-         return Center(child: Transform(
-                          transform: Matrix4.translationValues(
-                              self.vars["radius"] * self.vars["waveVal"].vars["z"],
-                              -self.vars["radius"] * self.vars["waveVal"].vars["k"],
-                              0.0)
-                            ..rotateZ(
-                              -self.vars["waveVal"].vars["rot"],
-                            ),
-                          child: FractionalTranslation(
-                            translation: Offset(-0.5, -0.5),
-                            child: Container(
-                              height: 30.0,
-                              width: 10.0,
-                              color:self.vars["color"],
-                            ),
-                          ),
-                        ),
-                      );
-          }
-
-    }
-  },
+ 
   "wave": {
     "vars": (var tokens) => {
-          "weight": tryParse(tokens, ["weight", "w"]) ?? 0.0,
-          "PPF": tryParse(tokens, ["PPF", "progressPerFrame", "ppf"]) ?? 1.0,
+          "weight": tryParse(tokens, ["weight", "w"]) ?? 1.0,
+          "freq": tryParse(tokens, ["freq", "progressPerFrame", "ppf"]) ?? 1.0,
           "progress": tryParse(tokens, ["progress", "p"]) ?? 0.0,
           "trace": [],
           "color": parseMap["color"](tokens),
@@ -422,21 +244,22 @@ Map<String, dynamic> otherModelsLib = {
           "radius": 100.0
         },
     "functions": (CustomModel self) => {
-          "z": () => self.vars["weight"] * cos(self.calls["progToRad"]()),
-          "k": () => self.vars["weight"] * sin(self.calls["progToRad"]()),
-          "progToRad": () => 2 * pi * (self.vars["progress"] * 9 / 10),
-          "updateWave": (double newProgress) {
-            self.vars["trace"].add(self.calls["k"]());
-            self.vars["progress"] = self.vars["PPF"] * newProgress;
-
-            return CustomModel.fromLib(
-                "waveVal_k_${self.calls["k"]()}_z_${self.calls["z"]()}_rot_${self.calls["progToRad"]()}");
+          "z": () => self.vars["weight"] *Z(self.vars["progress"]),
+          "k": () => self.vars["weight"] *K(self.vars["progress"]),
+          "progToRad": () => rad(self.vars["progress"]),
+          "updateWave": (double stepPerUpdate) {
+            self.vars["trace"].add(self.vars["weight"]*K(self.vars["progress"]));
+            self.vars["progress"] +=  stepPerUpdate * self.vars["freq"];
+            //self.vars["PPF"] * newProgress;
+            return CustomModel.fromLib2(
+                "waveVal_k_${self.vars["weight"]*K(self.vars["progress"])}_z_${self.vars["weight"]*Z(self.vars["progress"])}_rot_${rad(self.vars["progress"])}");
           },
           "toWidget":(var tokens){
            return Center(
                         child: Transform(
                           transform: Matrix4.translationValues(
-                              self.vars["radius"] * self.calls["z"](),
+                              self.vars["radius"] * 
+                              self.calls["z"](),
                               -self.vars["radius"] * self.calls["k"](),
                               0.0)
                             ..rotateZ(
@@ -453,7 +276,7 @@ Map<String, dynamic> otherModelsLib = {
                         ),
                       );
           }
-          
+      
         }
   },
   "waveVal": {
@@ -588,3 +411,87 @@ Map<String, dynamic> otherModelsLib = {
   },
 
 };
+ // "comboWave": {
+  //   "vars": (var tokens) => {
+  //         "waves":tokens["waves"],
+  //         "PPF": tokens.containsKey("freq")? 1/tokens("freq"):tokens.containsKey("ppf")?tokens["ppf"] : 0.012,
+  //         "progress":  0.0,
+  //         "samplingfreq":  tokens.containsKey("samplingfreq")?tokens["samplingfreq"]:-1,
+  //         "color": tokens.containsKey("color")?tokens["color"]:Colors.green,
+  //         "waveVal": CustomModel.fromLib2("waveVal"),
+  //         "sampleLocations": [],
+  //         "sampleCounter":0,
+  //         "trace":[],
+  //         "radius":100.0,
+  //       },
+  //   "functions": (CustomModel self) => {
+  //         "update": () {
+  //         self.vars["trace"].add(self.vars["waveVal"]?.vars["k"]);
+  //         self.vars["sampleCounter"] += 1;
+  //         if (self.vars["samplingfreq"] != -1 && (self.vars["sampleCounter"]> self.vars["samplingfreq"])) {
+  //           self.vars["sampleLocations"].add(CustomModel.fromLib2("point_x_${self.vars["waveVal"].vars["z"]}_y_${self.vars["waveVal"].vars["k"]}"));//Point(waveVals.z, waveVals.k)
+  //           self.vars["sampleCounter"]= 0;
+  //           if (self.vars["sampleLocations"].length > 1) {
+  //             double x =  (self.vars["sampleLocations"][0].vars["x"] * (self.vars["sampleLocations"].length - 1) +
+  //                         self.vars["sampleLocations"].last.vars["x"]) /
+  //                     self.vars["sampleLocations"].length;
+  //             double y =  0.9*(self.vars["sampleLocations"][0].vars["y"]* (self.vars["sampleLocations"].length - 1) +
+  //                         self.vars["sampleLocations"].last.vars["y"]) /
+  //                     self.vars["sampleLocations"].length;
+  //             self.vars["sampleLocations"][0] = CustomModel.fromLib2("point_x_${x}_y_$y");
+  //           }
+  //         }
+  //         self.vars["waveVal"]?.calls["zero"]();
+  //         self.vars["waves"].forEach((w) {
+  //           CustomModel wa = w.calls["updateWave"](self.vars["progress"]);
+  //           self.vars["waveVal"]?.calls["add"](wa);
+  //         });
+  //         self.vars["waveVal"].vars["rot"] = self.vars["waveVal"].vars["rot"] / self.vars["waves"].length;
+  //         self.vars["progress"] += self.vars["PPF"];
+  //     },
+      // "animate":({@required TickerProvider vsync, @required Function() setState}){
+  
+      //       self.vars["animationController"]=  AnimationController(vsync: vsync, duration: Duration(seconds: 5))
+      //     ..addListener(() {
+      //       self.calls["update"]();
+      //       setState();
+      //     })
+      //     ..repeat();
+      //     },
+      //     "dispose":(){
+      //       self.vars["animationController"].dispose();
+      //     },
+      // "paint": (Canvas canvas, Size size){
+      // },
+      // "toWidgetList":(var tokens){//var radius = tokens.containsKey("radius")?tokens["radius"]:100.0;
+      //   var widgetList = [self.calls["toWidget"](tokens)];
+      //   self.vars["waves"]?.forEach((w)=>widgetList.add(w.calls["toWidget"](tokens)));
+      //   return widgetList;
+      // },
+      // "toWidget":(var tokens){
+        
+      //   // "center+transform(transform_@transform)+fractionalTranslation(offset(dx_-0.5_dy_-0.5))+container(h_30_w_10_color_green)
+      //   // var trans = Matrix4.translationValues( radius * self.vars["waveVal"].vars["z"], -radius * self.vars["waveVal"].vars["k"],
+      //                      //   0.0)..rotateZ(  -self.vars["waveVal"].vars["rot"],),
+      //    return Center(child: Transform(
+      //                     transform: Matrix4.translationValues(
+      //                         self.vars["radius"] * self.vars["waveVal"].vars["z"],
+      //                         -self.vars["radius"] * self.vars["waveVal"].vars["k"],
+      //                         0.0)
+      //                       ..rotateZ(
+      //                         -self.vars["waveVal"].vars["rot"],
+      //                       ),
+      //                     child: FractionalTranslation(
+      //                       translation: Offset(-0.5, -0.5),
+      //                       child: Container(
+      //                         height: 30.0,
+      //                         width: 10.0,
+      //                         color:self.vars["color"],
+      //                       ),
+      //                     ),
+      //                   ),
+      //                 );
+      //     }
+
+  //  }
+  //},

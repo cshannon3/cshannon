@@ -1,52 +1,43 @@
 
-//import 'dart:math';
+// //import 'dart:math';
 
-import 'package:flutter/material.dart';
-// TODO better way to deal with colors
-Map<String, Color> catColors = {
-  "Neuroscience":Colors.green,
-  "Networks":Colors.blue,
-  "AI": Colors.red,
-  "Math": Colors.amber,
-  "Music":Colors.deepPurple,
-  "General":Colors.deepOrange,
-  "Youtube":Colors.white,
-  "Computers":Colors.cyan
-};
-class ItemNode{
-  final String name;
-  final String url; 
-  final String imgUrl;
-  final int id;
-  final String description;
-  Color fontColor;
-  Rect nodeLoc;
+// import 'package:flutter/material.dart';
+// // TODO better way to deal with colors
 
- // Point pt;
-  NetworkImage image;
-  List<String> categories=[];
+// class ItemNode{
+//   final String name;
+//   final String url; 
+//   final String imgUrl;
+//   final int id;
+//   final String description;
+//   Color fontColor;
+//   Rect nodeLoc;
 
-  ItemNode({this.imgUrl, this.name, this.url, this.categories, this.fontColor=Colors.white,this.id,  this.description}){
-    image=NetworkImage(imgUrl);
-  }
-  ItemNode copy()=>ItemNode(imgUrl: imgUrl, name: name, categories: categories,fontColor: fontColor, description: description, url: url, id:id);
-}
+//  // Point pt;
+//   NetworkImage image;
+//   List<String> categories=[];
 
-
-
-
-
-
-
-
-
-//  Widget toWidget( Function() onTap){//Size screenSize,
-//      return (nodeLoc==null)?null:
-//      Positioned.fromRect(
-//        rect: nodeLoc,
-//       child: bubble(radius: nodeLoc.width/2, onTap: onTap)
-//      );
+//   ItemNode({this.imgUrl, this.name, this.url, this.categories, this.fontColor=Colors.white,this.id,  this.description}){
+//     image=NetworkImage(imgUrl);
 //   }
+//   ItemNode copy()=>ItemNode(imgUrl: imgUrl, name: name, categories: categories,fontColor: fontColor, description: description, url: url, id:id);
+// }
+
+
+
+
+
+
+
+
+
+// //  Widget toWidget( Function() onTap){//Size screenSize,
+// //      return (nodeLoc==null)?null:
+// //      Positioned.fromRect(
+// //        rect: nodeLoc,
+// //       child: bubble(radius: nodeLoc.width/2, onTap: onTap)
+// //      );
+// //   }
 
   
 

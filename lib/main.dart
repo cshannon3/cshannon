@@ -116,8 +116,8 @@ TextInputClient p;
 
   @override
   Widget build(BuildContext context) {
-    print("Update");
-    print(MediaQuery.of(context).size);
+    //print("Update");
+    //print(MediaQuery.of(context).size);
     stateManager.setScale(MediaQuery.of(context).size);
     
     return Scaffold(
@@ -149,6 +149,9 @@ TextInputClient p;
             menubutton(name: "Home", //width: .2 * w,
             onPress: () => stateManager.changeScreen("/")
             ),
+             menubutton(name: "Sites", //width: .2 * w,
+            onPress: () => stateManager.changeScreen("/sites")
+            ),
             menubutton(name: "Essays", //width: .2 * w,
             onPress: () => stateManager.changeScreen("/essays")
             ),
@@ -157,10 +160,8 @@ TextInputClient p;
             menubutton(
                 name: "Quotes",
                // width: .2 * w,
-                onPress: () => stateManager.changeScreen("/music")),
-            menubutton(name: "Sites", //width: .2 * w,
-            onPress: () => stateManager.changeScreen("/sites")
-            ),
+                onPress: () => stateManager.changeScreen("/quotes")),
+           
           ],
           
   

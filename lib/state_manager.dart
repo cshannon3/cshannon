@@ -1,36 +1,40 @@
 
-import 'package:cshannon/controllers/animation_controller.dart';
 import 'package:cshannon/controllers/data_controller.dart';
 import 'package:cshannon/controllers/scale_controller.dart';
-import 'package:cshannon/data/bubble_data.dart';
-import 'package:cshannon/models/category_bubble.dart';
-import 'package:cshannon/models/item_node.dart';
+import 'package:cshannon/data/projects_data.dart';
+import 'package:cshannon/screens/paint.dart';
 import 'package:cshannon/screens/screens.dart';
 import 'package:cshannon/utils/model_builder.dart';
-import 'package:cshannon/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class StateManager extends ChangeNotifier {
   DataController dataController = DataController();
-  AnimController animController= AnimController();
  
   String currentRoute = "/";
   ScaleController sc;
+  Widget currentScreen=Container();
 
   StateManager();
 
     Map<String, dynamic> dataMap={
-    "projects":{"name":"project", "collection_name": "projects", "models":[],},
+    "projects":{"name":"project", "collection_name": "projects", "models":projects,},
     "books":{"name":"book", "collection_name": "books", "models":[],},
     "quotes":{"name":"quote", "collection_name": "quotes", "models":[],},
     "categories":{"name":"category", "collection_name": "categories", "models":[],},
-    "nodes":{"name":"node", "collection_name": "nodes", "models":[],},
-  
+    "sites":{"name":"site", "collection_name": "sites", "models":[],},
+    "youtube":{"name":"youtube", "collection_name": "youtube", "models":[],},
   };
   List<CustomModel> getModels(String key)=>(dataMap.containsKey(key) &&dataMap[key]["models"].isNotEmpty)?dataMap[key]["models"] 
     :[];
-  
-  
+  List<CustomModel> getAllModels(){
+    List<CustomModel> cm=[];
+      cm.addAll(dataMap["projects"]["models"]);
+      cm.addAll(dataMap["books"]["models"]);
+      cm.addAll(dataMap["sites"]["models"]);
+      cm.addAll(dataMap["youtube"]["models"]);
+   
+    return cm;
+    }
 
   Future<void> initialize(/*Firestore _db,*/) async {
     // List k = dataMap.keys.toList();
@@ -40,36 +44,37 @@ class StateManager extends ChangeNotifier {
 
     // }
     dataMap.forEach((key, dataInfo) async{
-      dataMap[key]["models"]= await dataController.getDataList(dataMap[key]["name"], dataMap[key]["collection_name"]);
-
+      if(dataMap[key]["models"].isEmpty)
+        dataMap[key]["models"]= await dataController.getDataList(dataMap[key]["name"], dataMap[key]["collection_name"]);
     });
    
     //notifyListeners();
   }
   
   Map<String, dynamic> routes = {
-    "/": (StateManager m) => HomePage(m),
-    "/fourier": (StateManager m) => Fourier2(),
-    "/guiboxes": (StateManager m) => Container(),// MyMainApp(),
-    "/paint": (StateManager m) => Container(),// PaintDemo(),
-    "/music": (StateManager m) => PianoScreen(),
-    "/quotes": (StateManager m) => Quotes(m),
-    "/books":(StateManager m) => Books(m),
-    "/essays": (StateManager m) => Essays(m),
-    "/sites":(StateManager m) =>  Bubbles(m),
+    "/": (StateManager m) =>new HomePage(m),
+    "/fourier": (StateManager m) =>new  Fourier2(m),
+    "/guiboxes": (StateManager m) =>new  GuiScreen2(m),// MyMainApp(),
+    "/paint": (StateManager m) =>new  PaintDemo(),// PaintDemo(),
+    "/music": (StateManager m) =>new  PianoScreen(),
+    "/quotes": (StateManager m) =>new  Quotes(m),
+    "/books":(StateManager m) =>new  Books(m),
+    "/essays": (StateManager m) =>new  Essays(m),
+    "/sites":(StateManager m) =>new   Bubbles(m, "sites"),
+    //"/bbooks":(StateManager m) =>  Bubbles(m, "books"),
     //"/people":(StateManager m) => Container()
   };
-
-
   setScale(Size screenSize){
     if(sc==null)sc=ScaleController(screenSize);
     else sc.rescale(screenSize);
+
     notifyListeners();
   }
   Widget getScreen() {
-    return routes[currentRoute](this);
+    
+    currentScreen= routes[currentRoute](this);
+    return currentScreen;
   }
-  
 
   changeScreen(String route) {
     if (routes.containsKey(route)) {
@@ -77,7 +82,6 @@ class StateManager extends ChangeNotifier {
       notifyListeners();
     }
   }
-
 }
 
 

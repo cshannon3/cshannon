@@ -3,11 +3,7 @@
         "color": "green",
         "id": 0
     },
-    {
-        "name": "Networks",
-        "color": "blue",
-        "id": 1
-    },
+
     {
         "name": "AI",
         "color": "red",
@@ -33,11 +29,7 @@
         "color": "cyan",
         "id": 6
     },
-    {
-    "name": "Youtube",
-    "color": "white",
-    "id": 7
-    },
+    
     {
     "name":"Education",
     "color":"indigo",
@@ -62,6 +54,11 @@
         "name":"History",
         "color":"teal",
         "id":12
+    },
+    {
+        "name":"UI",
+        "color":"grey",
+        "id":13
     }
 
 ]

@@ -17,9 +17,12 @@ class DataController  {
          "name": modelName,
          "vars":item
           });
+          cm.vars["type"]=modelName;
         em.add(cm);
+
       });
-    //  print(em.last.vars);
+      
+     // print(em.last.vars);
      // print(em.length);
       return em;
     }

@@ -49,7 +49,8 @@ flutter:
     - assets/jsons/books.json
     - assets/jsons/quotes.json
     - assets/jsons/essays.json
-    - assets/jsons/nodes.json
+    - assets/jsons/sites.json
+    - assets/jsons/youtube.json
     - assets/jsons/projects.json
     - assets/jsons/categories.json
     - assets/map.png
@@ -146,6 +147,29 @@ flutter:
     - assets/bookimages/selfish.jpg
     - assets/bookimages/behave.jpg
     - assets/bookimages/gene.jpg
+    - assets/audio/piano_48.mp3
+    - assets/audio/piano_49.mp3
+    - assets/audio/piano_50.mp3
+    - assets/audio/piano_51.mp3
+    - assets/audio/piano_52.mp3
+    - assets/audio/piano_53.mp3
+    - assets/audio/piano_54.mp3
+    - assets/audio/piano_55.mp3
+    - assets/audio/piano_56.mp3
+    - assets/audio/piano_57.mp3
+    - assets/audio/piano_58.mp3
+    - assets/audio/piano_59.mp3
+    - assets/audio/piano_60.mp3
+    - assets/audio/piano_61.mp3
+    - assets/audio/piano_62.mp3
+    - assets/audio/piano_63.mp3
+    - assets/audio/piano_64.mp3
+    - assets/audio/piano_65.mp3
+    - assets/audio/piano_66.mp3
+    - assets/audio/piano_67.mp3
+    - assets/audio/piano_68.mp3
+    - assets/audio/piano_69.mp3
+    - assets/audio/Bing-sound.mp3
   # To add assets to your application, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg

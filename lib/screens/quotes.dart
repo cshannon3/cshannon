@@ -16,9 +16,48 @@ class _QuotesState extends State<Quotes> {
   @override
   Widget build(BuildContext context) {
    // List quotes=widget.stateManager.quotesList;
-   List<CustomModel> quotes=widget.stateManager.getModels("quotes");
-    //print(quotes.last.vars["author"]);
-    // Random random= Random();
+   
+    return widget.stateManager.sc.mobile?mobileLayout():desktopLayout();
+  }
+  Widget mobileLayout(){
+    List<CustomModel> quotes=widget.stateManager.getModels("quotes");
+    quotes.shuffle();
+    return Container(
+    
+      //  color: Colors.blue,
+      padding: EdgeInsets.all(30.0),
+      child:ListView(
+                        children: List.generate(
+                            (quotes.length).floor(), (i) {
+                      //  print(widget.quotesList[i].author);
+                      return StatefulBuilder(
+                          builder: (BuildContext context, setState) {
+                        return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                                padding: EdgeInsets.all(30.0),
+                                decoration: BoxDecoration(
+                                    color: RandomColor.next().withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.6), width: 2.0)),
+                                width: double.infinity,
+                                child: Center(
+                                    child: toRichText({
+                                         "color":"grey100",
+                                         "fontSize":18,
+                                      "text":"\""+quotes[i].vars["text"]+ "\"@@bold@@@@italic@@@@colorblue@@\n\n -${quotes[i].vars["author"]}"
+                                    })
+                                  //  quotes[i]
+                                   //    .calls["formattedText"]()
+                                   )
+                                   ));
+                      });
+                    })));
+  }
+
+  Widget desktopLayout(){
+    List<CustomModel> quotes=widget.stateManager.getModels("quotes");
     quotes.shuffle();
     return Container(
     
