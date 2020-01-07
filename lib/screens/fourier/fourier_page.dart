@@ -138,54 +138,60 @@ refresh(){
        );
   }
   Widget sideBar(){
-     return ListView(
-                  children: <Widget>[
-                Container(
-                  height: 160,
-                  width: double.infinity,
-                  child: Image.network(
-                      "https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif"),
-                ),
-                ExpansionTile(
-                  title: Text("Resources"),
-                  children: [Container(
-                   // height: 200,
+     return Container(
+       decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+             ),
+       child: ListView(
+                    children: <Widget>[
+                  Container(
+                    height: 160,
                     width: double.infinity,
-                    child: Center(
-                      child: toRichText({
-                        "token": "#",
-                        "fontSize": 18,
-                        "text":resources }),
-                    ),
-                  ),]
-                ),
-                ExpansionTile(
-                  title: Text("What is Music?"),
-                  children: [Container(
-                   // height: 200,
-                    width: double.infinity,
-                    child: Center(
-                      child: toRichText({
-                        "token": "#",
-                        "fontSize": 18,
-                        "text":resources }),
-                    ),
-                  ),]
-                ),
-                ExpansionTile(
-                  title: Text("Why Do We Like It?"),
-                  children: [Container(
-                   // height: 200,
-                    width: double.infinity,
-                    child: Center(
-                      child: toRichText({
-                        "token": "#",
-                        "fontSize": 18,
-                        "text":resources }),
-                    ),
+                    child: Image.network(
+                        "https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif"),
                   ),
-                  ]),
-              ]);
+                  ExpansionTile(
+                    title: Text("Resources"),
+                    children: [Container(
+                     // height: 200,
+                      width: double.infinity,
+                      child: Center(
+                        child: toRichText({
+                          "token": "#",
+                          "fontSize": 18,
+                          "text":resources }),
+                      ),
+                    ),]
+                  ),
+                  ExpansionTile(
+                    title: Text("Seeing Music"),
+                    children: [Container(
+                     // height: 200,
+                      width: double.infinity,
+                      child: Center(
+                        child: toRichText({
+                          "token": "#",
+                          "fontSize": 18,
+                          "text":explanation }),
+                      ),
+                    ),]
+                  ),
+                  // ExpansionTile(
+                  //   title: Text("Why Do We Like It?"),
+                  //   children: [Container(
+                  //    // height: 200,
+                  //     width: double.infinity,
+                  //     child: Center(
+                  //       child: toRichText({
+                  //         "token": "#",
+                  //         "fontSize": 18,
+                  //         "text":resources }),
+                  //     ),
+                  //   ),
+                  //   ]),
+                ]),
+     );
   }
 
   Widget mobileLayout(Size size){

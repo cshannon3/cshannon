@@ -3,6 +3,7 @@ import 'package:cshannon/controllers/data_controller.dart';
 import 'package:cshannon/controllers/scale_controller.dart';
 import 'package:cshannon/data/projects_data.dart';
 import 'package:cshannon/screens/paint.dart';
+import 'package:cshannon/screens/rap_pad/rappad.dart';
 import 'package:cshannon/screens/screens.dart';
 import 'package:cshannon/utils/model_builder.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +61,8 @@ class StateManager extends ChangeNotifier {
     "/quotes": (StateManager m) =>new  Quotes(m),
     "/books":(StateManager m) =>new  Books(m),
     "/essays": (StateManager m) =>new  Essays(m),
-    "/sites":(StateManager m) =>new   Bubbles(m, "sites"),
+    "/sites":(StateManager m) =>new   Bubbles(m),
+    "/raps":(StateManager m) =>new   RapPad(),
     //"/bbooks":(StateManager m) =>  Bubbles(m, "books"),
     //"/people":(StateManager m) => Container()
   };

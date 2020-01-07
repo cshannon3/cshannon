@@ -9,9 +9,6 @@ To be able to do this, first in and out of gui mode,
 
 
 */
-import 'dart:async';
-import 'dart:math';
-
 /*
 Main features - ui layout mode for when editing
 Once editing is done you can 'freeze' to data which saves app in data that can be instantly parsed by the app itself,
@@ -23,6 +20,9 @@ To be able to do this, first in and out of gui mode,
 
 
 */
+import 'package:cshannon/secrets.dart';
+import 'package:firebase/firestore.dart';
+import 'package:firebase/firebase.dart' as fb;
 
 import 'package:cshannon/components/animated_list.dart';
 import 'package:cshannon/state_manager.dart';
@@ -31,18 +31,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() async{
-/*
+
     try {
     fb.initializeApp(
-       apiKey: "AIzaSyDU-vLIua4u1l0i2LikrZIMV3YTqoDynOA",
-    authDomain: "portfolio-27dc5.firebaseapp.com",
-    databaseURL: "https://portfolio-27dc5.firebaseio.com",
-    projectId: "portfolio-27dc5",
-    storageBucket: "portfolio-27dc5.appspot.com",
-    messagingSenderId: "616077941152",
+      apiKey: secrets["apiKey"],
+    authDomain: secrets["authDomain"],
+    databaseURL: secrets["databaseURL"],
+    projectId: secrets["projectId"],
+    storageBucket: secrets["storageBucket"],
+    messagingSenderId: secrets["messagingSenderId"],
+      
     
-    //appId: "1:616077941152:web:2273ab53f446b9287d2cc5",
-    //measurementId: "G-50EGC0S52Y"
+    appId: "1:616077941152:web:2273ab53f446b9287d2cc5",
+    measurementId: "G-50EGC0S52Y"
     );
 
     
@@ -50,7 +51,7 @@ void main() async{
     
   } on fb.FirebaseJsNotLoadedException catch (e) {
     print(e);
-  }*/
+  }
   runApp(new MyApp());
 }
 
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: Colors.grey,
       debugShowCheckedModeBanner: false,
       home: RootApp(), 
     );
@@ -136,7 +138,6 @@ TextInputClient p;
   
             Positioned.fromRect(
               rect: stateManager.sc.mainArea(),
-           
                child: 
               stateManager.getScreen()
              // ),   // navigation.getCurrentScreen()(),),

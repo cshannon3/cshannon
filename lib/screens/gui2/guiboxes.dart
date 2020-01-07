@@ -14,6 +14,10 @@ import 'package:cshannon/utils/utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+
+
+
+
 class GuiScreen2 extends StatefulWidget {
   final StateManager stateManager;
 
@@ -90,8 +94,7 @@ class _GuiScreen2State extends State<GuiScreen2> {
     };
     }
 
-
-    d = MainDelagator();
+    d = MainDelagator((BoxInfo focusBoxData)=>setFocus(focusBoxData));
     d.rootBox = GuiBox(LRTB(0.0, 1.0, 0.0, 1.0));
     d.rootBox.isRoot = true;
     d.rootBox.childrenBoxes.addAll([
@@ -107,7 +110,25 @@ class _GuiScreen2State extends State<GuiScreen2> {
 
   }
   Color boxColor()=>colorFromString(map["color"]["value"] + map["shade"]["value"], opacity: map["opacity"]["value"]);
-  
+  setFocus(BoxInfo bd){
+    print(bd.prnt());
+     map["color"]["value"]=bd.color;
+      map["childType"]["value"]=bd.childType;
+       map["opacity"]["value"]=bd.opacity;
+        map["shade"]["value"]=bd.shade;
+      map["decorate"]["value"]=bd.decorate;
+      map["borderThickness"]["value"]=bd.borderThickness;
+      map["borderColor"]["value"]=bd.borderColor;
+      map["borderRadius"]["value"]=bd.borderRadius;
+      map["hasPadding"]["value"]=bd.hasPadding;
+      map["centered"]["value"]=bd.centered;
+      map["photoFromUrl"]["value"]=bd.imgUrl;
+     
+      setState(() {
+        
+      });
+
+    }
   void updateVal(String key, var newVal){
     if(map[key] is Map)
           map[key]["value"]=newVal;
@@ -116,42 +137,6 @@ class _GuiScreen2State extends State<GuiScreen2> {
    print(key);
    setState(() {});
  }
- 
- Widget getBox({Widget child}){
-         CHILDTYPE childType=map["childType"]["value"];
-        return Container(
-            decoration: 
-            BoxDecoration(
-              color:boxColor(),//boxColor,
-              border: map["decorate"]["value"]?Border.all(width:map["borderThickness"]["value"], color: colorFromString(map["borderColor"]["value"]),):null,
-              borderRadius: map["decorate"]["value"]?BorderRadius.circular(map["borderRadius"]["value"]):null
-            ),
-            child: Padding(
-              padding: EdgeInsets.all((map["hasPadding"]["value"])?8.0:0.0),
-              child: (child!=null)? child:
-              map["hasChildren"]["value"]
-                  ? ListView( children: lw, )
-                     : map["centered"]["value"]?Center(child:
-                     (childType==CHILDTYPE.BOX)? child:
-                      (childType==CHILDTYPE.IMAGE)? (map["photoFromUrl"]["value"]!="")?Image.network(map["photoFromUrl"]["value"], fit: BoxFit.fill,):Container():
-                      //(photoFromAsset!="")?Image.asset("assets/images/$photoFromAsset"):Container():
-                       (childType==CHILDTYPE.BUTTON)? Container():
-                        (childType==CHILDTYPE.TEXT)?textEdits[0].toWidget(children: textEdits.sublist(1), recognizers: textTapDetectors)://Text(textEditingController.text):
-                          Container()
-                     ):
-                       (childType==CHILDTYPE.BOX)? child:
-                      (childType==CHILDTYPE.IMAGE)? (map["photoFromUrl"]["value"]!="")?Image.network(map["photoFromUrl"]["value"], fit: BoxFit.fill,):Container():
-                      //(photoFromAsset!="")?Image.asset("assets/images/$photoFromAsset"):Container():
-                       (childType==CHILDTYPE.BUTTON)? Container():
-                        (childType==CHILDTYPE.TEXT)?textEdits[0].toWidget(children: textEdits.sublist(1), recognizers: textTapDetectors)://Text(textEditingController.text):
-                          Container()
-            ),
-          );
-      }
-
-      BoxInfo saveBoxInfo(){
-
-      }
 
  @override
   void dispose() {
@@ -163,8 +148,8 @@ class _GuiScreen2State extends State<GuiScreen2> {
  // CHILDTYPE childType=map["childType"]["value"];
     return Positioned(
      left: 0.0,
-     top: 0.0,
-     width: 400.0,
+     bottom: 50.0,
+     width: widget.stateManager.sc.w(),
      height: 50.0,
 child:
          Container(
@@ -175,13 +160,9 @@ child:
                         children: <Widget>[
                           wm.toWidget("color"),
                           wm.toWidget("shade"),
-                      
-                
+                          Container(width: 700.0,child: wm.toRow(["opacity","centered","decorate","borderColor", "borderThickness", "borderRadius"],))
                         ],
-           ),
-         ),
-               
-              );
+           ),  ),  );
   }
    Widget textSettings(){
     return Row(
@@ -207,7 +188,7 @@ child:
                             Expanded(
                                     child: TextField(
                                       controller:fontSizeController,
-                                                                              onChanged: (text) {
+                                      onChanged: (text) {
                                           var newFontSize = double.tryParse(text);
                                           if(newFontSize!=null && newFontSize>0.0)
                                           setState(() {
@@ -239,7 +220,7 @@ child:
                 child: Container(
                     color: Colors.transparent,
                     child: d.rootBox
-                        .toStack(d.size,  refresh: () => setState(() {}), getBox: ({Widget child})=>getBox(child: child)))) //
+                        .toStack(d.size, boxinfo: BoxInfo.fromMap(map), refresh: () => setState(() {}))),) //getBox: ({Widget child})=>getBox(child: child)
 
             ),
             optionsWidget()
@@ -255,13 +236,18 @@ class MainDelagator extends ChangeNotifier {
   //Set context for each setstate in order to  have access to widget tree info
   BuildContext context;
   Size size;
+ final Function(BoxInfo map) setFocus;
 
   GuiBox rootBox;
   Point currentTapLocation;
-  MainDelagator();
+  bool focus=false;
+
+  MainDelagator(this.setFocus);
 
   double getH() => size.height;
   double getW() => size.width;
+
+  
   updateTapLocation(Offset screenpos) =>
       currentTapLocation = Point(screenpos.dx / getW(), screenpos.dy / getH());
 
@@ -274,12 +260,14 @@ class MainDelagator extends ChangeNotifier {
     print("TAP UP");
     //updateTapLocation(details.globalPosition);
     updateTapLocation(details.localPosition);
-    rootBox.handleClick(currentTapLocation);
+    rootBox.resetFocuses();
+    focus= rootBox.handleClick(currentTapLocation, setFocus);
     notifyListeners();
   }
 
   onPanStart(DragStartDetails details) {
     print("PAN START");
+    focus=false;
     //updateTapLocation(details.globalPosition);
     updateTapLocation(details.localPosition);
     rootBox.handleDrag(currentTapLocation);
@@ -293,6 +281,7 @@ class MainDelagator extends ChangeNotifier {
   }
 
   onPanEnd(DragEndDetails details) {
+    focus=true;
     rootBox.endDrag();
     notifyListeners();
   }
@@ -304,17 +293,13 @@ enum PRESS { TAP, DOUBLETAP, LONGPRESS, PAN }
 class DragPainter extends CustomPainter {
   final DragBox dragbox;
   final Paint boxPaint1;
-  //final Paint dropPaint;
 
   DragPainter({
     this.dragbox,
   }) : boxPaint1 = Paint()
-  //dropPaint = Paint()
   {
     boxPaint1.color = this.dragbox.color;
     boxPaint1.style = PaintingStyle.fill;
-    // dropPaint.color = Colors.grey;
-    // dropPaint.style = PaintingStyle.fill;
   }
 
   @override
@@ -331,6 +316,10 @@ class DragPainter extends CustomPainter {
 }
 
 
+
+
+    // dropPaint.color = Colors.grey;
+    // dropPaint.style = PaintingStyle.fill;
    // wm.toWidget("opacity"),
                          // Container(child: Row(children: wm.toWidgets(["color", "shade", "opacity"], additonalWidgets: {"0":Text("Color:")}) )),
                          // wm.or("decorate", wm.toRow(["borderColor", "borderThickness", "borderRadius"], additional:{"0":Text("Border:")}), wm.toRaisedButton("decorate") ),
@@ -360,3 +349,39 @@ class DragPainter extends CustomPainter {
                         //      Container()),//: Container(),
                      //  wm.toRaisedButton("hasPadding"),
                       // wm.toRaisedButton("optionsOpen"),
+
+// Widget getBox({Widget child}){
+//          CHILDTYPE childType=map["childType"]["value"];
+//         return Container(
+//             decoration: 
+//             BoxDecoration(
+//               color:boxColor(),//boxColor,
+//               border: map["decorate"]["value"]?Border.all(width:map["borderThickness"]["value"], color: colorFromString(map["borderColor"]["value"]),):null,
+//               borderRadius: map["decorate"]["value"]?BorderRadius.circular(map["borderRadius"]["value"]):null
+//             ),
+//             child: Padding(
+//               padding: EdgeInsets.all((map["hasPadding"]["value"])?8.0:0.0),
+//               child: (child!=null)? child:
+//               map["hasChildren"]["value"]
+//                   ? ListView( children: lw, )
+//                      : map["centered"]["value"]?Center(child:
+//                      (childType==CHILDTYPE.BOX)? child:
+//                       (childType==CHILDTYPE.IMAGE)? (map["photoFromUrl"]["value"]!="")?Image.network(map["photoFromUrl"]["value"], fit: BoxFit.fill,):Container():
+//                       //(photoFromAsset!="")?Image.asset("assets/images/$photoFromAsset"):Container():
+//                        (childType==CHILDTYPE.BUTTON)? Container():
+//                         (childType==CHILDTYPE.TEXT)?textEdits[0].toWidget(children: textEdits.sublist(1), recognizers: textTapDetectors)://Text(textEditingController.text):
+//                           Container()
+//                      ):
+//                        (childType==CHILDTYPE.BOX)? child:
+//                       (childType==CHILDTYPE.IMAGE)? (map["photoFromUrl"]["value"]!="")?Image.network(map["photoFromUrl"]["value"], fit: BoxFit.fill,):Container():
+//                       //(photoFromAsset!="")?Image.asset("assets/images/$photoFromAsset"):Container():
+//                        (childType==CHILDTYPE.BUTTON)? Container():
+//                         (childType==CHILDTYPE.TEXT)?textEdits[0].toWidget(children: textEdits.sublist(1), recognizers: textTapDetectors)://Text(textEditingController.text):
+//                           Container()
+//             ),
+//           );
+//       }
+
+//       BoxInfo saveBoxInfo(){
+
+//       }

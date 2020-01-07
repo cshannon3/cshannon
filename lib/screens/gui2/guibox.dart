@@ -1,5 +1,6 @@
 
 import 'dart:math';
+import 'package:cshannon/screens/gui2/boxInfo.dart';
 import 'package:cshannon/screens/gui2/dragbox.dart';
 import 'package:cshannon/screens/gui2/guiboxes.dart';
 import 'package:cshannon/screens/gui2/lrtb.dart';
@@ -16,94 +17,113 @@ class GuiBox{
   int tapCount=0;
   int myTapCount=0;
   Color color;
+  BoxInfo _boxInfo=BoxInfo();
 
-
- // Point activeClickLocation;
   bool dismissMe=false;
   bool isDragging=false;
   bool childDragging=false;
-  bool passedInChild=false;
   bool guiActive=true;
   bool isRoot=false;
+  bool isfoc=false;
+
   String type="";
   dynamic childCall;
-  
 
   Widget child;
   GuiBox(this.loc, {this.color});
-  bool isFocused()=>(myTapCount>0 && currentIndex==null);
+  resetFocuses(){
+     isfoc=false;
+        if(childrenBoxes.isNotEmpty)
+          childrenBoxes.forEach((b){
+            b.resetFocuses();
+          });
+  }
+   bool checkFocus(){
+     bool f = isfoc;
+     int i=0;
+     while(!f && childrenBoxes.length>i){
+        f=childrenBoxes[i].checkFocus();
+        i++;
+     }
+      return f;
+  }
 
-  bool handleClick(Point clickLocation, ){
-    print("MY LOCATION");
-    loc.prnt();
-  print(clickLocation);
-    if(loc.isWithin(clickLocation)){
-      myTapCount+=1;
-      Point rs = loc.rescale(clickLocation);
-      print("HANDLE CLICK");
-      print(rs);
-      print(clickLocation);
-      print(myTapCount);
-     
-        if(childrenBoxes.isNotEmpty && myTapCount>1 ){//&& !passedInChild
-          print("CHILD NOT EMPTY");
-          int i =0;
-          while(childrenBoxes.length>i && !childrenBoxes[i].handleClick(rs))i++;
-          if(i==childrenBoxes.length){
-            print("SELF CLICKED");
-            if(currentIndex!=null){currentIndex=null;tapCount=0;}else{ tapCount+=1;}
-           // if(!guiActive)return true;
-            if(myTapCount>1){// && !passedInChild
-                  GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y),color: RandomColor.next());
-                  childrenBoxes.add(b); 
-                  currentIndex=childrenBoxes.length-1;
-                  setBounds();
-                  childrenBoxes.last.fitSpace(shrink:0.75);
-              }
-            }
-
-          else{
-              print("CHILD $i CLICKED");
-              if(currentIndex!=i){currentIndex = i;tapCount=0;}
-              else tapCount+=1;
-              if(tapCount>2){
-              print("CHILD MULTITAP");
-                
-              } 
-              }
-        }
-
-
-        else if(myTapCount>2 ){ //&& !passedInChild && guiActive&& !passedInChild
-            print("SELF MULTITAP");
-           
-            GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y), color: RandomColor.next());
-            childrenBoxes.add(b);
-            currentIndex=childrenBoxes.length-1;
-            setBounds();
-              childrenBoxes.last.fitSpace(shrink:0.75);
-               print("CHILD LOCATION");
-               childrenBoxes.last.loc.prnt();
-        }
-      else{
-           if(currentIndex!=null){currentIndex=null;tapCount=0;}else{ tapCount+=1;}
-        }
+   bool handleClick(Point clickLocation, Function(BoxInfo newData) setFocus){
+    print("MY LOCATION");loc.prnt();print(clickLocation);
+   
     
-      return true;
-    }
+    if(loc.isWithin(clickLocation))return _handleClick(clickLocation, setFocus);
+     
     else {
+      isfoc=false;
       myTapCount=0;
       currentIndex=null;tapCount=0;
       return false;
     }
   }
 
+  bool _handleClick(Point clickLocation, Function(BoxInfo newData) setFocus){
+    // CLICK WAS MADE INSIDE BOX
+      myTapCount+=1;
+      isfoc=false;
+      Point rs = loc.rescale(clickLocation);
+
+      print("HANDLE CLICK"); print(rs); print(clickLocation);print(myTapCount);
+      // HAS CHILDREN
+      if(childrenBoxes.isNotEmpty && myTapCount>1){//&& !passedInChild//print("CHILD NOT EMPTY");
+          int i =0;
+          while(childrenBoxes.length>i && !childrenBoxes[i].handleClick(rs, setFocus))i++;
+          
+          if(i==childrenBoxes.length){
+           
+                  if(currentIndex!=null){
+                    // Last tap was on an inner box -> set focus back to self
+                    currentIndex=null;
+                    tapCount=0;setFocus(_boxInfo);
+                    isfoc=true;
+                  }
+                  else{ 
+                    tapCount+=1;
+                    if(tapCount>2)
+                    addGui(rs);    
+                  } 
+            }
+          else{
+              isfoc=false;print("CHILD $i CLICKED");
+              if(currentIndex!=i){currentIndex = i;tapCount=0;}
+              else tapCount+=1;
+              if(tapCount>2){
+              print("CHILD MULTITAP");
+              } 
+         }
+        }
+        else if(myTapCount>2 )
+           addGui(rs);
+        
+      else{
+          if(currentIndex!=null){currentIndex=null;tapCount=0;isfoc=false;}else{ tapCount+=1; isfoc=true;setFocus(_boxInfo);}
+        }
+         return true;
+    
+  }
+
+   addGui(Point rs){
+     // This will add a box centered around the clicked point and expanded to 75% of available space
+            GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y), color: RandomColor.next());
+            b.isfoc=true;
+            isfoc=false;
+            childrenBoxes.add(b);
+            currentIndex=childrenBoxes.length-1;
+            setBounds();
+              childrenBoxes.last.fitSpace(shrink:0.75);
+               print("CHILD LOCATION");
+               childrenBoxes.last.loc.prnt();
+  }
+
   bool handleDrag(Point clickLocation){
-   // print("HDRAG");
     print(clickLocation);
     loc.prnt();
     if(loc.isWithin(clickLocation)){
-      //print("TRE");
       Point rs = loc.rescale(clickLocation);
       print(rs);
       setBounds();
@@ -170,7 +190,6 @@ class GuiBox{
     }
   }
 
-
   Widget al({Function() refresh}){
     return Align(alignment: Alignment.topRight,child: IconButton(icon: Icon(Icons.blur_circular,color: guiActive?Colors.green:Colors.grey,),
     onPressed: (){
@@ -180,9 +199,9 @@ class GuiBox{
     ),
     );
   }
-  Widget toWidget(Size screenSize, { Function() refresh,@required Function({Widget child}) getBox}){//Widget newChild,
+  Widget toWidget(Size screenSize, {BoxInfo boxinfo, Function() refresh,}){//Widget newChild,@required Function({Widget child}) getBox
     Size s = Size((loc.right-loc.left)*screenSize.width,(loc.bottom-loc.top)*screenSize.height);
-
+    if(isfoc)_boxInfo=boxinfo;
      return Positioned(
        left: loc.left*screenSize.width,
        width: s.width,
@@ -196,12 +215,11 @@ class GuiBox{
            decoration: BoxDecoration(
            color:color,
            borderRadius: BorderRadius.circular(20.0),
-           border:isFocused()?Border.all(color: Colors.grey, width: 5.0):null
+           border:isfoc?Border.all(color: Colors.grey, width: 5.0):null
            ),
-         child:isFocused()?getBox(child:(childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):null):
-         (childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):
-         Center(child: Text("Box X"))
-         )),
+         child:_boxInfo.toWidget(child: (childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, boxinfo: boxinfo):null)
+         )
+         ),
            guiActive?SizedBox.fromSize(
           size: s,
           child:Container(
@@ -211,11 +229,10 @@ class GuiBox{
        ));
 
   }
-    Widget toStack(Size screenSize, {Function() refresh, @required Function({Widget child}) getBox}){
-      //print(screenSize);
+    Widget toStack(Size screenSize, {BoxInfo boxinfo,Function() refresh,}){
       List<Widget> out=[];
       childrenBoxes.forEach((f){
-        out.add(f.toWidget(screenSize, refresh: refresh,getBox: getBox ));
+        out.add(f.toWidget(screenSize, refresh: refresh,boxinfo: boxinfo, ));
       });
       
      // if(currentDragBox!=null)
@@ -231,12 +248,40 @@ class GuiBox{
       
       return Stack(children: out);
     }
-
-
-
 }
 
+ //&& !passedInChild && guiActive&& !passedInChild print("SELF MULTITAP");
 
 
+  //bool isFocused()=>(myTapCount>0 && currentIndex==null);
+         //isFocused()?getBox(child:(childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):null):
+        // (childrenBoxes.isNotEmpty)?toStack(s, refresh: refresh, getBox: getBox):
+        // Center(child: Text("Box X"))
+
+//Function({Widget child}) getBox
+      //print(screenSize);
+  // void handleChildClick(){
+
+  // }
+  // void handleSelfClick(){
+
+  // }
+
+                //   if(tapCount<1){
+                //   setFocus(_boxInfo);
+                //   isfoc=true;
+                // }
+  // GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y), color: RandomColor.next());
+  //           childrenBoxes.add(b);
+  //           currentIndex=childrenBoxes.length-1;
+  //           setBounds();
+  //             childrenBoxes.last.fitSpace(shrink:0.75);
+  //              print("CHILD LOCATION");
+  //              childrenBoxes.last.loc.prnt();
 
 
+//  GuiBox b= GuiBox(LRTB(rs.x, rs.x, rs.y, rs.y),color: RandomColor.next());
+//                   childrenBoxes.add(b); 
+//                   currentIndex=childrenBoxes.length-1;
+//                   setBounds();
+//                   childrenBoxes.last.fitSpace(shrink:0.75);

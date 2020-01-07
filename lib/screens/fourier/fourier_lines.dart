@@ -1,8 +1,6 @@
 
 
 import 'dart:async';
-
-import 'package:cshannon/screens/fourier/fourier_page.dart';
 import 'package:cshannon/screens/fourier/trace_painter.dart';
 import 'package:cshannon/screens/fourier/waves.dart';
 import 'package:flutter/material.dart';

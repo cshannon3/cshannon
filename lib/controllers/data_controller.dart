@@ -11,7 +11,6 @@ class DataController  {
      // print(modelName);
       String data = await rootBundle.loadString("assets/jsons/$collectionName.json");//source
       final jsonData = json.decode(data);
-   //  print(jsonData.length);
       jsonData.forEach((item){
         CustomModel cm = CustomModel.fromLib({
          "name": modelName,

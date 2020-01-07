@@ -64,10 +64,10 @@
           {
       "id": 7,
          "imgUrl":"https://www.asimovinstitute.org/wp-content/uploads/2019/04/AsinRound-300x300.png", 
-         "name":"THE ASIMOV INSTITUTE", 
-         "url":"https://www.asimovinstitute.org/neural-network-zoo-prequel-cells-layers/",
+         "name":"The Asimov Institute", 
+         "url":"https://www.asimovinstitute.org",
          "categories": ["AI"],
-         "description": "sjffff"
+         "description": "Favorite Articles: \n\n-#linkhttps://www.asimovinstitute.org/neural-network-zoo-prequel-cells-layers/##colorblue#Neural Network Zoo Prequel Cells Layers#/color##/link#\n-#linkhttps://www.asimovinstitute.org/analyzing-deep-learning-tools-music/##colorblue#Analyzing Six Deep Learning Tools For Music Generation#/color##/link#"
          },
           {
       "id": 9,
@@ -76,7 +76,7 @@
          "name":"Hook Theory", 
          "url":"https://www.hooktheory.com/trends",
          "categories": ["Music"],
-         "description": " "
+         "description": ""
          },
          {
       "id": 10,
@@ -106,7 +106,7 @@
          "name":"Stratechery", 
          "url":"https://stratechery.com/",
          "categories": ["General" ],
-         "description": ""
+         "description": "Favorite Articles: \n\n-#linkhttps://stratechery.com/2019/shopify-and-the-power-of-platforms/##colorblue#Shopify and the Power of Platforms#/color##/link#\n-#linkhttps://stratechery.com/2019/the-2019-stratechery-year-in-review/##colorblue#The 2019 Stratechery Year in Review#/color##/link#"
          },
              {
                 "fontColor": "black",
@@ -115,8 +115,36 @@
          "name":"Paul Graham", 
          "url":"http://www.paulgraham.com/articles.html",
          "categories": ["General" ],
-         "description": " "
-         }
+         "description": "Favorite Articles: \n\n-#linkhttp://www.paulgraham.com/essay.html##colorblue#Age of Essays#/color##/link#\n-#linkhttp://www.paulgraham.com/hs.html##colorblue#What You'll Wish You'd Known#/color##/link#"
+         },
+         {
+            "fontColor": "black",
+  "id": 14,
+     "imgUrl":"https://s3-us-west-1.amazonaws.com/pioneer-blog/2018/10/logo-4.png", 
+     "name":"Daniel Gross", 
+     "url":"https://dcgross.com/",
+     "categories": ["General" ],
+     "description": "Favorite Articles: \n\n-#linkhttps://dcgross.com/accomplish-dread-tasks/##colorblue#How To Overcome Dread Tasks#/color##/link#\n-#linkhttps://dcgross.com/feedback-loops/##colorblue#Feedback Loops#/color##/link#"
+     },
+     {
+      "fontColor": "black",
+"id": 14,
+"imgUrl":"https://cdn.shopify.com/s/files/1/0306/3653/files/Wait-But-Why_2048x.png?v=1517029055", 
+"name":"Wait By Why", 
+"url":"https://waitbutwhy.com/",
+"categories": ["General" ],
+"description": "Favorite Articles: \n\n-#linkhttps://waitbutwhy.com/2018/04/picking-career.html##colorblue#How to Pick a Career (That Actually Fits You)#/color##/link#\n-#linkhttps://waitbutwhy.com/2019/09/thinking-ladder.html##colorblue#The Thinking Ladder#/color##/link#"
+},
+{
+   "fontColor": "black",
+"id": 14,
+"imgUrl":"https://i1.wp.com/tim.blog/wp-content/uploads/2014/04/timferrissshowart-1400x1400.jpg?fit=1200%2C1200&ssl=1", 
+"name":"Tim Ferris", 
+"url":"https://tim.blog/",
+"categories": ["General" ],
+"description": "Favorite Podcasts: \n\n-#linkhttps://tim.blog/2019/03/15/safi-bahcall-loonshots/##colorblue#Safi Bahcall — On Thinking Big, Curing Cancer, and Transforming Industries#/color##/link#\n-#linkhttps://tim.blog/guest/adam-grant/##colorblue#Adam Grant — The Man Who Does Everything#/color##/link#\n-#linkhttps://tim.blog/guest/ann-miura-ko/##colorblue#Ann Miura-Ko — The Path from Shyness to World-Class Debater and Investor#/color##/link#"
+}
+     
       
 ]
  

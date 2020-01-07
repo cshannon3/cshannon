@@ -1,7 +1,11 @@
 # cshannon
 
 A new Flutter project.
-
+TODOs
+Essays
+- Make 1 decent essay 
+Rap Pad
+- 
 ## Getting Started
 
 This project is a starting point for a Flutter application.

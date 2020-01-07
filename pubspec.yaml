@@ -26,6 +26,10 @@ dependencies:
     git:
       url: git://github.com/flutter/plugins.git
       path: packages/video_player/video_player_web
+
+  provider: any
+  shared_preferences: 
+  google_sign_in:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
@@ -46,6 +50,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+  
     - assets/jsons/books.json
     - assets/jsons/quotes.json
     - assets/jsons/essays.json
@@ -56,6 +61,19 @@ flutter:
     - assets/map.png
     - assets/coverphoto.jpg
     - assets/coverphoto2.jpg
+    - assets/audio/black_thought_backagain_2.wav
+    - assets/audio/black_thought_nevertheless_2.wav
+    - assets/audio/black_thought_rapfigures_2.wav
+    - assets/audio/black_thought_soundofthebeast_2.wav
+    - assets/audio/free_the_robot - fastway_2.wav
+    - assets/audio/free_the_robot - pushingcrack_2.wav
+    - assets/audio/free_the_robot - stevieblind_2.wav
+    - assets/audio/free_the_robot - thundersound_2.wav
+    - assets/audio/lose_yourself - soulsescaping_2.wav
+    - assets/audio/maad_city - backnine_2.wav
+    - assets/audio/maad_city - jumpintheseat_2.wav
+    - assets/audio/maad_city - punk_2.wav
+    - assets/audio/paper_trails - ipromise_2.wav
     - assets/images/clef.png
     - assets/images/sharp.png
     - assets/images/bass.png

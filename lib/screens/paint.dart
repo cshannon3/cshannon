@@ -569,7 +569,15 @@ class _PaintAreaState extends State<PaintArea> {
                 });
               },),
               FlatButton(child: Text("Mountians"),onPressed: (){
-                img="https://imagevars.gulfnews.com/2018/12/11/RDS_181211_Pakistan's_mountains_1_16a0853f269_large.jpg";
+                img= "https://imagevars.gulfnews.com/2018/12/11/RDS_181211_Pakistan's_mountains_1_16a0853f269_large.jpg";
+                  
+                setState(() {
+                  
+                });
+              },),
+              FlatButton(child: Text("Dots"),onPressed: (){
+                img="http://getdrawings.com/images/connect-the-dot-drawing-4.gif";
+              //  "https://imagevars.gulfnews.com/2018/12/11/RDS_181211_Pakistan's_mountains_1_16a0853f269_large.jpg";
                   
                 setState(() {
                   

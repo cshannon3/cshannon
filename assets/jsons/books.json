@@ -10,9 +10,9 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/loonshots.png",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Tim Ferris"
 },
 {
@@ -25,9 +25,9 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/whatschoolscouldbe.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Ann Miura-Ko"
 },
 {
@@ -40,9 +40,7 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/onintelligence.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":""
 },
 {
@@ -55,9 +53,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/fooledbyrandomness.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
 },
 {
@@ -70,9 +68,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/gettingtoyes.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Ann Miura-Ko"
 },
 {
@@ -85,9 +83,9 @@
     "ownershipStatus":"own",
     "readingStatus":"started",
     "imgUrl":"assets/bookimages/meditations.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Tim Ferris"
 },
 {
@@ -100,9 +98,9 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/thinkingfastandslow.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Micheal Lewis"
 },
 {
@@ -115,9 +113,9 @@
     "ownershipStatus":"own",
     "readingStatus":"started",
     "imgUrl":"assets/bookimages/highoutput.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Tim Ferris"
 },
 {
@@ -130,9 +128,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/influence.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
 },
 {
@@ -145,9 +143,7 @@
     "ownershipStatus":"own",
     "readingStatus":"started",
     "imgUrl":"assets/bookimages/worldof3zeros.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Google Talks"
 },
 {
@@ -160,9 +156,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/mindwise.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
 },
 {
@@ -175,9 +171,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/oneworldschoolhouse.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
 },
 {
@@ -190,9 +186,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/onwritingwell.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Tim Ferris"
 },
 {
@@ -205,9 +199,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/elementsofstyle.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Tobias Lütke"
 },
 {
@@ -220,9 +214,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/codersat.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":""
     },
     {
@@ -235,9 +227,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/thinkinginsystems.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":""
     },
     {
@@ -250,9 +240,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/codecomplete.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":""
     },
     {
@@ -265,9 +253,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/brainchanges.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Julia"
     },
     {
@@ -280,9 +266,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/lessonsfromhist.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Ray Dalio"
     },
     {
@@ -295,9 +279,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/principlesofpsych.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":""
     },
     {
@@ -310,9 +292,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/origin.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Naval"
     },
     {
@@ -325,9 +305,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/structofsci.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -340,9 +320,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/dreammachine.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Tobias Lütke"
     },
     {
@@ -355,9 +335,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/cons.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -370,9 +350,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/howtosurvive.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -385,9 +365,9 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/onedu.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -400,9 +380,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/howfail.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -415,9 +395,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/humanmot.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Charles Koch"
     },
     {
@@ -430,9 +410,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/hirehead.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -445,9 +425,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/storycraft.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -460,9 +440,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/mindstorms.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Patrick Collison"
     },
     {
@@ -475,9 +455,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/upright.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Christina"
     },
     {
@@ -489,9 +469,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/incognito.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Christina"
     },
     {
@@ -503,9 +483,7 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/roadtoserfdom.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+    "description": "",
     "recommendedBy":"Charles Koch"
     },
     
@@ -518,9 +496,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/something.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":"Patrick Collison"
     },
     {
@@ -532,9 +510,9 @@
     "ownershipStatus":"own",
     "readingStatus":"read",
     "imgUrl":"assets/bookimages/peak.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -546,9 +524,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/startupnation.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -560,9 +538,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/paiget.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -574,9 +552,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/outofmao.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -588,9 +566,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/ageofa.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -602,9 +580,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/societyofmind.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -612,13 +590,13 @@
     "isbn":"9780143124047",
     "title":"How to Create a Mind",
     "author":"Ray Kurzweil",
-    "categories":["Artificial Intelligence","Neuroscience", "Systems" ], "year":2013,
+    "categories":["AI","Neuroscience", "Systems" ], "year":2013,
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/createmind.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -630,9 +608,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/innertennis.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -644,9 +622,9 @@
     "ownershipStatus":"own",
     "readingStatus":"not started",
     "imgUrl":"assets/bookimages/surely.jpg",
-    "chapters":"",
-    "readingEvents":"",
-    "ideaNodes":"",
+
+    "description": "",
+    
     "recommendedBy":""
     },
     {
@@ -654,14 +632,14 @@
         "isbn": "1610390938",
         "title": "Poor Economics",
         "author": "Abhijit Banerjee, Ester Duflo",
-        "categories":["Economics", "Business"], 
+        "categories":[ "Business","Economics"], 
         "year": 2012,
         "ownershipStatus": "own",
         "readingStatus": "started",
         "imgUrl": "assets/bookimages/pooreconomics.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -674,9 +652,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/theoriesofchild.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -684,14 +662,14 @@
         "isbn": "978-1476733500",
         "title": "The Gene: An Intimate History",
         "author": "Siddhartha Mukherjee",
-        "categories":["Information", "Evolution", "Systems", "Science", "History"], 
+        "categories":[ "Science","Information", "Evolution", "Systems", "History"], 
         "year": 2016,
         "ownershipStatus": "own",
         "readingStatus": "started",
         "imgUrl": "assets/bookimages/gene.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -699,14 +677,14 @@
         "isbn": "9780393316049",
         "title": "The Metaphysical Club: A Story of Ideas in America",
         "author": "Menand, Louis",
-        "categories":["Philosophy","History"], 
+        "categories":["History","Philosophy"], 
         "year": 2002,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/metaphy.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -719,9 +697,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/behave.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -734,9 +712,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/selfish.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -749,9 +727,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/worldsinhidden.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -764,9 +742,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/howmusic.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -779,9 +757,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/telltalebrain.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -789,14 +767,14 @@
         "isbn": "9780393316049",
         "title": "A Mind at Play: How Claude Shannon Invented the Information Age",
         "author": "Soni, Jimmy",
-        "categories":["Information", "Systems", "Biography"], 
+        "categories":["Systems", "Information", "Biography"], 
         "year": 2018,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/amindat.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -804,14 +782,14 @@
         "isbn": "9780393316049",
         "title": "The Beginning of Infinity: Explanations That Transform the World",
         "author": "David Deutsch",
-        "categories":["Evolution","Science", "History"], 
+        "categories":["Science", "Evolution","History"], 
         "year": 2012,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/infinity.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -824,9 +802,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/social.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -839,9 +817,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/thebrain.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -854,9 +832,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/howthemindworks.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -864,14 +842,14 @@
         "isbn": "9780393316049",
         "title": "The Information: A History, A Theory, A Flood",
         "author": "Gleick, James",
-        "categories":["Information", "Systems", "History", "Biology", "Evolution"], 
+        "categories":["Systems","Information",  "History", "Biology", "Evolution"], 
         "year": 2011,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/info.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -884,9 +862,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/linked.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -899,9 +877,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/platform.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -914,9 +892,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/thanksforfeedback.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -929,9 +907,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/complex.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -944,9 +922,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/gettingthings.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -959,9 +937,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/sync.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -974,9 +952,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/trouble.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -989,9 +967,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/dictatorshandbook.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1004,9 +982,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/whywesleep.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1019,9 +997,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/moonwalkingwitheinstein.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1029,14 +1007,12 @@
         "isbn": "9780393316049",
         "title": "Where Good Ideas Come From: The Natural History of Innovation",
         "author": "Johnson, Steven",
-        "categories":["Evolution", "Systems","History","Business", "Culture", "Science", "Psychology"], 
+        "categories":[ "Systems","Evolution","History","Business", "Culture", "Science", "Psychology"], 
         "year": 2010,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/wheregoodideas.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     },
     {
@@ -1049,9 +1025,8 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/sapiens.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1064,24 +1039,24 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/howwelearn.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
         "Id": 73,
         "isbn": "9780393316049",
         "title": "21 Lessons for the 21st Century",
-        "categories":[ "Philosophy","Culture", "Systems"] ,
+        "categories":["History", "Philosophy","Culture", "Systems"] ,
         "author": "Harari, Yuval Noah",
         "year": 2018,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/21lessons.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1094,9 +1069,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/neuroplas.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1109,9 +1084,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/finnishlessons.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1124,9 +1099,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/historyofev.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1139,9 +1114,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/driven.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1149,14 +1124,14 @@
         "isbn": "9780393316049",
         "title": "Gödel, Escher, Bach: An Eternal Golden Braid",
         "author": "Hofstadter, Douglas R.",
-        "categories":["Systems", "Artificial Intelligence", "Computing"], 
+        "categories":["AI","Systems",  "Computing"], 
         "year": 1999,
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/geb.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1169,9 +1144,9 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/centercant.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        
+        "description": "",
+       
         "recommendedBy": ""
     },
     {
@@ -1184,9 +1159,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/dozombiesdream.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     },
     {
@@ -1199,9 +1172,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/launch.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     },
     {
@@ -1214,9 +1185,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/fifthdis.png",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     },
     {
@@ -1229,9 +1198,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/lifelong.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     },
     {
@@ -1244,9 +1211,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/entangled.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+         "description": "",
         "recommendedBy": ""
     },
     {
@@ -1259,9 +1224,7 @@
         "ownershipStatus": "own",
         "readingStatus": "not started",
         "imgUrl": "assets/bookimages/howtolie.jpg",
-        "chapters": "",
-        "readingEvents": "",
-        "ideaNodes": "",
+        "description": "",
         "recommendedBy": ""
     }
 

@@ -21,7 +21,7 @@ class _BooksState extends State<Books> {
  @override
   void initState() {
     super.initState();
-    books=widget.stateManager.getAllModels();//"books"
+    books=widget.stateManager.getModels("books");//
   }
   void onActivate(CustomModel book){
     if(activeModels.contains(book)){

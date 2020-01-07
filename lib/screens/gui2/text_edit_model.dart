@@ -12,7 +12,10 @@ class TextEditModel{
   int newLines=0;
 
   TextEditModel({this.text="", this.color="black", this.fs=FontStyle.normal, this.fontSize=16.0, this.fw=FontWeight.normal});
-
+ //TODO convert FontWeight and style to strings so they can be added more easily
+  String toStr()=>text;
+    
+    
 
   dynamic toWidget({var children, var recognizers,var recognizer }){
     var style = TextStyle(

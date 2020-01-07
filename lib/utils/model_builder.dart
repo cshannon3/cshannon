@@ -1,9 +1,4 @@
 
-
-
-import 'dart:math';
-
-import 'package:cshannon/models/category_bubble.dart';
 import 'package:cshannon/utils/mathish.dart';
 import 'package:cshannon/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +13,7 @@ class CustomModel {
     this.vars,
     this.calls
   });
+  
   CustomModel.fromLib(var data){
     if (data is String){
       var info = data.contains("_")? data.split("_"): [data];

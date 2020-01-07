@@ -11,7 +11,8 @@
 "name": "Paint",
 "demoPath":"/paint",
 "githubUrl": "https://github.com/cshannon3/flutter_paint",
-"imgUrl":"https://www.californiapaints.com/wp-content/uploads/californiapaints-favicon.png"
+"imgUrl":"https://www.californiapaints.com/wp-content/uploads/californiapaints-favicon.png",
+"description": ""
 },
 {
 "name": "Smart Contract App",

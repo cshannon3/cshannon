@@ -25,7 +25,7 @@ class _QuotesState extends State<Quotes> {
     return Container(
     
       //  color: Colors.blue,
-      padding: EdgeInsets.all(30.0),
+      padding: EdgeInsets.all(5.0),
       child:ListView(
                         children: List.generate(
                             (quotes.length).floor(), (i) {
